@@ -1,11 +1,16 @@
 import React from 'react'
 
-const Home = () => {
+const Footer = () => {
     return (
-        <div>
-            <div>Home</div>
-        </div>
+        <footer className="bg-slate-200">
+            <div className="w-full mx-auto">
+                <p className="p-6 text-slate-800 text-center">Crafted with ❤️ by Niharika.
+                </p>
+            </div>
+
+
+        </footer>
     )
 
 }
-export default Home
+export default Footer

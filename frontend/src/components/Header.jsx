@@ -2,16 +2,18 @@ import React from 'react'
 import Logo from './Logo'
 import { ImSearch } from "react-icons/im";
 import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa";
-
+import { Link } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <header className='h-16 shadow-md'>
+        <header className='h-16 shadow-md bg-white'>
             <div className='h-full container mx-auto flex items-center px-4 justify-between'>
 
                 {/* Logo */}
                 <div>
-                    <Logo />
+                    <Link to={'/'}>
+                        <Logo /></Link>
+
                 </div>
 
                 {/* search bar */}
@@ -45,9 +47,11 @@ const Header = () => {
                     {/* login button */}
 
                     <div>
-                        <button className="px-3 bg-red-600 py-1 rounded-full p-1 flex justify-center items-center text-white hover:bg-red-700">
-                            login
-                        </button>
+                        <Link to={'/login'}>
+                            <button className="px-3 bg-red-600 py-1 rounded-full p-1 flex justify-center items-center text-white hover:bg-red-700">
+                                login
+                            </button></Link>
+
                     </div>
 
                 </div>
