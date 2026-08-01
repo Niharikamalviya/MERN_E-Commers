@@ -3,7 +3,9 @@ import LoginIcons from '../assets/icons8-login.gif'
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react"
-import { Link } from 'react-router-dom'
+import { Link, navigate } from 'react-router-dom'
+import summaryApi from "../common/index"
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -12,6 +14,8 @@ const Login = () => {
     const [data, setData] = useState({
         email: "", password: "", confirmPassword: "", name: ""
     })
+
+    const navigate = usenavigation()
     const handleOnChange = (e) => {
         const { name, value } = e.target
 
@@ -34,7 +38,34 @@ const Login = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        if (data.password === data.confirmPassword) {
+            const dataResponse = fetch(summaryApi.signUp.url, {
+                method: summaryApi.signup.method,
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+
+            const userData = dataResponse.json()
+
+            if (userData.success) {
+                toast.success(userData.message)
+                navigate("/login")
+            }
+            if (userData.error) {
+                toast(userData.message);
+            }
+            console.log("Userdata", userData)
+        }
+        else {
+            console.log("please check password annd confirm password")
+        }
     }
+
+
+
 
     console.log("data SignUp", data)
 

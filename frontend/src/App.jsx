@@ -7,14 +7,31 @@ import Header from './components/Header'
 import ForgetPassword from './pages/ForgetPassword'
 import SignUp from "./pages/SignUp"
 import Footer from "./components/Footer"
+import { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react'
 
 function App() {
+
+  const fetchUserDetails = async () => {
+    const dataResponse = await fetch(summary.current_user.url, {
+      method: summaryApi.current_user.method,
+      credentials: 'include'
+
+    })
+    const dataApi = await dataResponse.json()
+    console.log("data-user", dataResponse)
+  }
+  useEffect(() => {
+    // user Details
+    fetchUserDetails();
+  })
   const [count, setCount] = useState(0)
 
   return (
     <>
       <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden">
         <Header />
+        <Toaster />
 
         <Routes>
           <Route path="/" element={<Home />} />

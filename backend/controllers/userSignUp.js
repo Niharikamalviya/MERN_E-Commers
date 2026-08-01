@@ -3,7 +3,10 @@ const bcrypt = require('bcrypt')
 
 exports.userSignUp = async (req, res) => {
     try {
-        const { email, password, name } = req.body
+        const { email, password, name } = req.body;
+
+        const user = await User.findOne({ email })
+        console.log("user", User)
 
         if (!email || !password || !name) {
             return res.status(400).json({
@@ -21,11 +24,12 @@ exports.userSignUp = async (req, res) => {
 
         const payload = {
             ...req.body,
+            role: "general",
             password: hashPassword
         }
 
         const user = new User(req.body)
-        const saveUser = user.save()
+        const saveUser = await user.save()
 
         res.status(200).json({
             data: saveUser,
@@ -36,6 +40,10 @@ exports.userSignUp = async (req, res) => {
 
     }
     catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "something went wrong in signup"
+        })
 
     }
 }

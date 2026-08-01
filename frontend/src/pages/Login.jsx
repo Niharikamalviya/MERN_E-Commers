@@ -3,7 +3,9 @@ import LoginIcons from '../assets/icons8-login.gif'
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast';
+import Context from "../context";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -11,6 +13,11 @@ const Login = () => {
         email: "",
         password: ""
     })
+
+    const navigate = usenavigate()
+    const { fetchUserDetails } = useContext(context)
+
+    console.log("generalContext", generalContext.fetchUserDetails())
     const handleOnChange = (e) => {
         const { name, value } = e.target
 
@@ -21,8 +28,29 @@ const Login = () => {
             }
         })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
+        const dataResponse = await fetch(summaryApi.login.url, {
+            method: summaryApi.login.method,
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+
+        })
+        const dataApi = await dataResponse.json()
+
+        if (dataApi.success) {
+            toast.success(dataApi.meesage)
+            generalContext.
+                navigate("/")
+
+        }
+        if (dataApit.error) {
+            toast.error(dataApi.message)
+        }
+
     }
 
     console.log("data login", data)
