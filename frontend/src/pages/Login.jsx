@@ -14,10 +14,15 @@ const Login = () => {
         password: ""
     })
 
-    const navigate = usenavigate()
-    const { fetchUserDetails } = useContext(context)
 
+    // navigate
+    const navigate = usenavigate()
+
+    //context API
+    const { fetchUserDetails } = useContext(context)
     console.log("generalContext", generalContext.fetchUserDetails())
+
+    //change handler
     const handleOnChange = (e) => {
         const { name, value } = e.target
 
@@ -28,6 +33,8 @@ const Login = () => {
             }
         })
     }
+
+    // submit handler
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -43,8 +50,9 @@ const Login = () => {
 
         if (dataApi.success) {
             toast.success(dataApi.meesage)
-            generalContext.
-                navigate("/")
+            navigate('/')
+            fetchUserDetails()
+
 
         }
         if (dataApit.error) {

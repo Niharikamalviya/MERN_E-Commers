@@ -3,8 +3,36 @@ import Logo from './Logo'
 import { ImSearch } from "react-icons/im";
 import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom'
+import { toast } from "react-hot-toast"
+import summaryApi from '../common'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUserDetails } from '../store/userSlice'
 
 const Header = () => {
+
+    // display user details on header
+    const user = useSelector(state => state?.user?.user)
+    const dispatch = useDispatch()
+    console.log("user header", user)
+
+    // logout handler
+    const handleLogout = async () => {
+        const fetchData = await fetch(summaryApi.logout_user.url, {
+            method: summaryApi.logout_user.method,
+            credentials: 'include'
+        })
+
+        const data = await fetchData.json()
+
+        if (data.success) {
+            toast.success(data.message)
+            dispatch(setUserDetails(null))
+        }
+
+        if (data.error) {
+            toast.error(data.message)
+        }
+    }
     return (
         <header className='h-16 shadow-md bg-white'>
             <div className='h-full container mx-auto flex items-center px-4 justify-between'>
@@ -30,7 +58,13 @@ const Header = () => {
                 <div className="flex itemx-center gap-7">
                     {/* user Icon */}
                     <div className="text-3xl cursor-pointer">
-                        <FaRegUserCircle />
+                        {
+                            user?.profilePic ? (
+                                <img src={user?.profilePic}
+                                    className="w-10 h-10 rounded-full" alt={user?.name} />
+                            ) : (<FaRegUserCircle />)
+                        }
+
                     </div>
 
                     {/* shooping card */}
@@ -47,10 +81,20 @@ const Header = () => {
                     {/* login button */}
 
                     <div>
-                        <Link to={'/login'}>
-                            <button className="px-3 bg-red-600 py-1 rounded-full p-1 flex justify-center items-center text-white hover:bg-red-700">
-                                login
-                            </button></Link>
+                        {
+                            user?._id ? (
+                                <button
+                                    onClick={ }
+                                    className="px-3 bg-red-600 py-1 rounded-full p-1 flex justify-center items-center text-white hover:bg-red-700">
+                                    Logout</button>
+                            ) : (
+                                <Link to={'/login'}>
+                                    <button className="px-3 bg-red-600 py-1 rounded-full p-1 flex justify-center items-center text-white hover:bg-red-700">
+                                        login
+                                    </button></Link>
+                            )
+                        }
+
 
                     </div>
 

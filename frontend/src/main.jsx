@@ -3,16 +3,17 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
-import { UserProvider } from "./context/UserContext";
+import { store } from './app/store'
+import { Provider } from 'react-redux'
+import { RouterProvider } from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <UserProvider value={{
-        fetchUserDetails
-      }}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
         <App />
-      </UserProvider>
+      </Provider>
     </BrowserRouter>
   </StrictMode>,
 

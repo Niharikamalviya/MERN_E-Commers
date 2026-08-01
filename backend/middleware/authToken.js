@@ -20,7 +20,7 @@ exports.authToken = async (req, res, next) => {
                 console.log("error auth", err)
             }
 
-            req.user = decoded;
+            req.userID = decoded;
             next()
 
 

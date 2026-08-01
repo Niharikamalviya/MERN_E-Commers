@@ -7,11 +7,12 @@ import Header from './components/Header'
 import ForgetPassword from './pages/ForgetPassword'
 import SignUp from "./pages/SignUp"
 import Footer from "./components/Footer"
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
 
 function App() {
 
+  const dispatch = useDispatch()
   const fetchUserDetails = async () => {
     const dataResponse = await fetch(summary.current_user.url, {
       method: summaryApi.current_user.method,
@@ -19,6 +20,10 @@ function App() {
 
     })
     const dataApi = await dataResponse.json()
+
+    if (dataApi.success) {
+      dispatch(setUserDetails(dataApi.data))
+    }
     console.log("data-user", dataResponse)
   }
   useEffect(() => {
@@ -29,22 +34,26 @@ function App() {
 
   return (
     <>
-      <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden">
-        <Header />
-        <Toaster />
+      <Context.Provider value={{
+        fetchUserDetails
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route path="/sign-up" element={<SignUp />} />
-        </Routes>
+      }}>
+        <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden">
+          <Header />
+          <Toaster />
 
-      </div>
-      <Footer />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route path="/sign-up" element={<SignUp />} />
+          </Routes>
+
+        </div>
+        <Footer />
 
 
-
+      </Context.Provider>
     </>
   )
 }
