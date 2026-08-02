@@ -28,8 +28,8 @@ exports.userSignUp = async (req, res) => {
             password: hashPassword
         }
 
-        const user = new User(req.body)
-        const saveUser = await user.save()
+        const userData = new User(req.body)
+        const saveUser = await userData.save()
 
         res.status(200).json({
             data: saveUser,

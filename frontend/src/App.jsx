@@ -9,12 +9,16 @@ import SignUp from "./pages/SignUp"
 import Footer from "./components/Footer"
 import { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
+import { useDispatch } from "react-redux";
+import { useContext } from "react";
+import Context from "./context/index"
+import summaryApi from "./common/index"
 
 function App() {
 
   const dispatch = useDispatch()
   const fetchUserDetails = async () => {
-    const dataResponse = await fetch(summary.current_user.url, {
+    const dataResponse = await fetch(summaryApi.current_user.url, {
       method: summaryApi.current_user.method,
       credentials: 'include'
 

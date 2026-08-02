@@ -2,10 +2,10 @@ import React from 'react'
 import LoginIcons from '../assets/icons8-login.gif'
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
-import Context from "../context";
+import Context from "../context/index";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -16,10 +16,10 @@ const Login = () => {
 
 
     // navigate
-    const navigate = usenavigate()
+    const navigate = useNavigate()
 
     //context API
-    const { fetchUserDetails } = useContext(context)
+    const { fetchUserDetails } = useContext(Context)
     console.log("generalContext", generalContext.fetchUserDetails())
 
     //change handler

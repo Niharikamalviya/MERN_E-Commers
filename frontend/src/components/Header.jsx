@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom'
 import { toast } from "react-hot-toast"
 import summaryApi from '../common'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUserDetails } from '../store/userSlice'
+import { setUserDetails } from '../slices/userSlice'
 
 const Header = () => {
 
     // display user details on header
     const user = useSelector(state => state?.user?.user)
     const dispatch = useDispatch()
-    console.log("user header", user)
+    console.log("user-header", user)
 
     // logout handler
     const handleLogout = async () => {
@@ -84,7 +84,7 @@ const Header = () => {
                         {
                             user?._id ? (
                                 <button
-                                    onClick={ }
+                                    onClick={handleLogout}
                                     className="px-3 bg-red-600 py-1 rounded-full p-1 flex justify-center items-center text-white hover:bg-red-700">
                                     Logout</button>
                             ) : (

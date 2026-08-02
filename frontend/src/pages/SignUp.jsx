@@ -3,7 +3,7 @@ import LoginIcons from '../assets/icons8-login.gif'
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react"
-import { Link, navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import summaryApi from "../common/index"
 import { toast } from 'react-hot-toast';
 

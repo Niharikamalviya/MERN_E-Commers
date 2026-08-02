@@ -10,6 +10,6 @@ const { userLogout } = require("../controllers/userLogout")
 router.post("/signup", userSignUp)
 router.post("/login", userLogin)
 router.get("/user-Details", authToken, userDetails)
-roouter.get("/userLogout", userLogout)
+router.get("/userLogout", userLogout)
 
 module.exports = router;
