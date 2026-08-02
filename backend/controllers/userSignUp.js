@@ -3,12 +3,20 @@ const bcrypt = require('bcrypt')
 
 exports.userSignUp = async (req, res) => {
     try {
-        const { email, password, name } = req.body;
+        console.log("req.body:", req.body);
+        const { email, password, name, confirmPassword } = req.body;
 
+        // check user may not be already exist if yes then 
         const user = await User.findOne({ email })
-        console.log("user", User)
+        console.log("user", user)
+        if (user) {
+            return res.status(400).json({
+                success: false,
+                messsage: "user is already exist",
+            })
+        }
 
-        if (!email || !password || !name) {
+        if (!email || !password || !name || !confirmPassword) {
             return res.status(400).json({
                 success: false,
                 message: "fields are require",
@@ -16,7 +24,7 @@ exports.userSignUp = async (req, res) => {
         }
 
         const salt = bcrypt.genSaltSync(10);
-        const hashPassword = await bcrypt.hashSync("password", salt);
+        const hashPassword = await bcrypt.hashSync(password, salt);
 
         if (!hashPassword) {
             throw new Error("somthing is wrong")
@@ -28,7 +36,7 @@ exports.userSignUp = async (req, res) => {
             password: hashPassword
         }
 
-        const userData = new User(req.body)
+        const userData = new User(payload)
         const saveUser = await userData.save()
 
         res.status(200).json({
@@ -40,8 +48,11 @@ exports.userSignUp = async (req, res) => {
 
     }
     catch (error) {
+        console.log(error)
         return res.status(500).json({
+
             success: false,
+            error: error.message,
             message: "something went wrong in signup"
         })
 

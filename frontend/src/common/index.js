@@ -1,20 +1,20 @@
 
-const backendDomain = "http://localhost:5173"
+const BASE_URL = "http://localhost:8080/api/v1/auth"
 const summaryApi = {
     signUp: {
-        url: `${backendDomain}/api/signup`,
+        url: `${BASE_URL}/signup`,
         method: "post"
     },
     login: {
-        url: `${backendDomain}/api/login`,
+        url: `${BASE_URL}/login`,
         method: "post"
     },
     current_user: {
-        url: `${backendDomain}/api/user-Details`,
+        url: `${BASE_URL}/api/user-Details`,
         method: "get"
     },
     logout_user: {
-        url: `${backendDomain}/api/userLogout`,
+        url: `${BASE_URL}/api/userLogout`,
         method: "get"
     }
 }

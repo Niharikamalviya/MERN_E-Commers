@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt")
 const User = require("../models/user")
-const JWT = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 exports.userLogin = async (req, res) => {
     try {
@@ -14,20 +14,21 @@ exports.userLogin = async (req, res) => {
             })
         }
         const user = await User.findOne({ email })
+
         if (!user) {
             throw new Error("user not found")
         }
 
-        const checkPassword = bcrypt.compare(password, user.password)
-        console.log("checkPassword", checkpassword)
+        const checkPassword = await bcrypt.compare(password, user.password)
+        console.log("checkPassword", checkPassword)
 
         if (checkPassword) {
             const tokenData = {
-                _id: user._id,
+                id: user._id,
                 email: user.email,
 
             }
-            const token = await jwt.login(tokenData, process.env.SECRET_KEY,
+            const token = jwt.sign(tokenData, process.env.SECRET_KEY,
                 { expiresIn: 60 * 60 }
             );
 
@@ -37,7 +38,7 @@ exports.userLogin = async (req, res) => {
             }
             res.cookie("token", token).json({
                 message: "login successfully",
-                data: token,
+                token: token,
                 success: true,
 
 
@@ -45,15 +46,18 @@ exports.userLogin = async (req, res) => {
 
         }
         else {
-            throw new Error("pleas check the passwords")
+
+            throw new Error("please check the password")
         }
 
 
 
     }
     catch (error) {
+        console.log(error)
         return res.status(500).json({
             success: false,
+            error: error.message,
             message: "something went wrong in login"
         })
 

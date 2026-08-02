@@ -19,8 +19,8 @@ const Login = () => {
     const navigate = useNavigate()
 
     //context API
-    const { fetchUserDetails } = useContext(Context)
-    console.log("generalContext", generalContext.fetchUserDetails())
+    // const { fetchUserDetails } = useContext(Context)
+    // console.log("generalContext", generalContext.fetchUserDetails())
 
     //change handler
     const handleOnChange = (e) => {

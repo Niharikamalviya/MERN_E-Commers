@@ -7,15 +7,18 @@ import { Link, useNavigate } from 'react-router-dom'
 import summaryApi from "../common/index"
 import { toast } from 'react-hot-toast';
 
-const Login = () => {
+const signUp = () => {
+
+    // use hooks
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [profile, setProfile] = useState(LoginIcons);
     const [data, setData] = useState({
         email: "", password: "", confirmPassword: "", name: ""
     })
+    const navigate = useNavigate()
 
-    const navigate = usenavigation()
+    // change handler for form data
     const handleOnChange = (e) => {
         const { name, value } = e.target
 
@@ -26,6 +29,10 @@ const Login = () => {
             }
         })
     }
+
+    console.log("data SignUp", data)
+
+    // handler for pic upload
     const handleUploadPic = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -36,28 +43,30 @@ const Login = () => {
 
         console.log("file", file)
     }
-    const handleSubmit = (e) => {
+
+    // handler for submited for data
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         if (data.password === data.confirmPassword) {
-            const dataResponse = fetch(summaryApi.signUp.url, {
-                method: summaryApi.signup.method,
+            const dataResponse = await fetch(summaryApi.signUp.url, {
+                method: summaryApi.signUp.method,
                 headers: {
                     "content-type": "application/json"
                 },
                 body: JSON.stringify(data)
             })
 
-            const userData = dataResponse.json()
+            const userSignUpData = dataResponse.json()
 
-            if (userData.success) {
+            if (userSignUpData.success) {
                 toast.success(userData.message)
                 navigate("/login")
             }
-            if (userData.error) {
+            if (userSignUpData.error) {
                 toast(userData.message);
             }
-            console.log("Userdata", userData)
+            console.log("userSignUpData", userSignUpData)
         }
         else {
             console.log("please check password annd confirm password")
@@ -65,21 +74,16 @@ const Login = () => {
     }
 
 
-
-
-    console.log("data SignUp", data)
-
-
     return (
-        <section id='login'>
+        <section id='signUp'>
             <div className="mx-auto p-4 mt-6">
 
 
                 <div className="bg-white p-2 w-full max-w-md mx-auto ">
-                    {/* login Icon */}
+                    {/* signUp Icon */}
 
                     <div className="w-20 h-20 mx-auto flex relative justify-center items-center rounded-full overflow-hidden">
-                        <img src={profile} alt='login icons'
+                        <img src={profile} alt='signUp icons'
                             className="w-full h-full object-cover" />
 
                         {/* upload Photo */}
@@ -190,4 +194,4 @@ const Login = () => {
     )
 
 }
-export default Login
+export default signUp
