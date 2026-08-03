@@ -6,6 +6,7 @@ import { useState, useContext } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
 import Context from "../context/index";
+import summaryApi from "../common/index"
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -46,22 +47,24 @@ const Login = () => {
             body: JSON.stringify(data)
 
         })
-        const dataApi = await dataResponse.json()
+        const loginData = await dataResponse.json()
 
-        if (dataApi.success) {
-            toast.success(dataApi.meesage)
+        if (loginData.success) {
+            toast.success(loginData.meesage)
             navigate('/')
-            fetchUserDetails()
+            // fetchUserDetails()
+
+            console.log("data login", loginData)
 
 
         }
-        if (dataApit.error) {
-            toast.error(dataApi.message)
+        if (loginData.error) {
+            toast.error(loginData.message)
         }
 
     }
 
-    console.log("data login", data)
+
 
 
     return (
@@ -120,7 +123,9 @@ const Login = () => {
                                 Forget Password</Link>
                         </div>
 
-                        <button className="bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:scale-110 trasition-all duration-200 mx-auto block mt-6 mb-4">Login</button>
+                        <button
+                            type="submit"
+                            className="bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:scale-110 trasition-all duration-200 mx-auto block mt-6 mb-4">Login</button>
 
                         <p className="my-4">Don't have account ? <Link to={"/sign-up"} className="hover:text-red-700 text-red-600"> Sign Up</Link></p>
 

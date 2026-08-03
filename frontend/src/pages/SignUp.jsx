@@ -5,7 +5,7 @@ import { FaEye } from "react-icons/fa";
 import { useState } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 import summaryApi from "../common/index"
-import { toast } from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 const signUp = () => {
 
@@ -57,14 +57,14 @@ const signUp = () => {
                 body: JSON.stringify(data)
             })
 
-            const userSignUpData = dataResponse.json()
+            const userSignUpData = await dataResponse.json()
 
             if (userSignUpData.success) {
-                toast.success(userData.message)
+                toast.success(userSignUpData.message)
                 navigate("/login")
             }
             if (userSignUpData.error) {
-                toast(userData.message);
+                toast(userSignUpData.message);
             }
             console.log("userSignUpData", userSignUpData)
         }
@@ -180,7 +180,9 @@ const signUp = () => {
 
                         </div>
 
-                        <button className="bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:scale-110 trasition-all duration-200 mx-auto block mt-6 mb-4">Sign Up</button>
+                        <button
+                            type="submit"
+                            className="bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:scale-110 trasition-all duration-200 mx-auto block mt-6 mb-4">Sign Up</button>
 
                         <p className="my-4">I have already an account <Link to={"/login"} className="hover:text-red-700 text-red-600"> Login</Link></p>
 

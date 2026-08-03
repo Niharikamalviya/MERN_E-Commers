@@ -1,0 +1,23 @@
+{
+  "name": "mern",
+  "version": "1.0.0",
+  "description": "\"# MERN_E-Commers\"",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Niharikamalviya/MERN_E-Commers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Niharikamalviya/MERN_E-Commers/issues"
+  },
+  "homepage": "https://github.com/Niharikamalviya/MERN_E-Commers#readme",
+  "devDependencies": {
+    "concurrently": "^10.0.4"
+  }
+}

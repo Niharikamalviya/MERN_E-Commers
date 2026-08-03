@@ -7,7 +7,7 @@ import Header from './components/Header'
 import ForgetPassword from './pages/ForgetPassword'
 import SignUp from "./pages/SignUp"
 import Footer from "./components/Footer"
-import { Toaster } from 'react-hot-toast'
+import { Toaster } from "react-hot-toast";
 import { useEffect } from 'react'
 import { useDispatch } from "react-redux";
 import { useContext } from "react";
@@ -17,47 +17,48 @@ import summaryApi from "./common/index"
 function App() {
 
   const dispatch = useDispatch()
-  const fetchUserDetails = async () => {
-    const dataResponse = await fetch(summaryApi.current_user.url, {
-      method: summaryApi.current_user.method,
-      credentials: 'include'
 
-    })
-    const dataApi = await dataResponse.json()
+  // const fetchUserDetails = async () => {
+  //   const dataResponse = await fetch(summaryApi.current_user.url, {
+  //     method: summaryApi.current_user.method,
+  //     credentials: 'include'
 
-    if (dataApi.success) {
-      dispatch(setUserDetails(dataApi.data))
-    }
-    console.log("data-user", dataResponse)
-  }
-  useEffect(() => {
-    // user Details
-    fetchUserDetails();
-  })
-  const [count, setCount] = useState(0)
+  //   })
+  //   const dataApi = await dataResponse.json()
+
+  //   if (dataApi.success) {
+  //     dispatch(setUserDetails(dataApi.data))
+  //   }
+  //   console.log("data-user", dataResponse)
+  // }
+  // useEffect(() => {
+  //   // user Details
+  //   fetchUserDetails();
+  // })
+
 
   return (
     <>
-      <Context.Provider value={{
+      {/* <Context.Provider value={{
         fetchUserDetails
 
-      }}>
-        <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden">
-          <Header />
-          <Toaster />
+      }}> */}
+      <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden">
+        <Header />
+        <Toaster />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/forget-password" element={<ForgetPassword />} />
-            <Route path="/sign-up" element={<SignUp />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/sign-up" element={<SignUp />} />
+        </Routes>
 
-        </div>
-        <Footer />
+      </div>
+      <Footer />
 
 
-      </Context.Provider>
+      {/* </Context.Provider> */}
     </>
   )
 }

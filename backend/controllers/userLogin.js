@@ -45,10 +45,7 @@ exports.userLogin = async (req, res) => {
             })
 
         }
-        else {
 
-            throw new Error("please check the password")
-        }
 
 
 
