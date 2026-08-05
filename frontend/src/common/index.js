@@ -10,13 +10,22 @@ const summaryApi = {
         method: "post"
     },
     current_user: {
-        url: `${BASE_URL}/api/user-Details`,
+        url: `${BASE_URL}/user-Details`,
         method: "get"
     },
     logout_user: {
-        url: `${BASE_URL}/api/userLogout`,
+        url: `${BASE_URL}/userLogout`,
         method: "get"
+    },
+    allUser: {
+        url: `${BASE_URL}/all-user`,
+        method: "get"
+    },
+    updateUser: {
+        url: `${BASE_URL}/update-user`,
+        method: "post"
     }
+
 }
 
 export default summaryApi

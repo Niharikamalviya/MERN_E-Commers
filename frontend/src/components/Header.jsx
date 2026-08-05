@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast"
 import summaryApi from '../common'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserDetails } from '../slices/userSlice'
+import { useState } from 'react'
 
 const Header = () => {
 
@@ -14,6 +15,7 @@ const Header = () => {
     const user = useSelector(state => state?.user?.user)
     const dispatch = useDispatch()
     console.log("user-header", user)
+    const [menuDisplay, setMenuDisplay] = useState(false)
 
     // logout handler
     const handleLogout = async () => {
@@ -57,13 +59,27 @@ const Header = () => {
                 {/* user icon and card */}
                 <div className="flex itemx-center gap-7">
                     {/* user Icon */}
-                    <div className="text-3xl cursor-pointer">
+                    <div className="relative flex justify-center">
+                        <div className="text-3xl cursor-pointer"
+                            onClick={() => setMenuDisplay(preve => !preve)}>
+                            {
+                                user?.profilePic ? (
+                                    <img src={user?.profilePic}
+                                        className="w-10 h-10 rounded-full" alt={user?.name} />
+                                ) : (<FaRegUserCircle />)
+                            }
+                        </div>
                         {
-                            user?.profilePic ? (
-                                <img src={user?.profilePic}
-                                    className="w-10 h-10 rounded-full" alt={user?.name} />
-                            ) : (<FaRegUserCircle />)
+                            menuDisplay && (
+                                <div className=" absolute bg-white bottom-0 top-11 h-fit p-1 rounded shadow-lg  ">
+                                    <nav>
+                                        <Link to={"/admin-panel"}
+                                            className="whitespace-nowrap text-lg hover:bg-slate-100 p-2">Admin panel</Link>
+                                    </nav>
+                                </div>
+                            )
                         }
+
 
                     </div>
 

@@ -13,6 +13,10 @@ import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import Context from "./context/index"
 import summaryApi from "./common/index"
+import AdminPanel from "./pages/adminPanel";
+import Alluser from "./pages/AllUser";
+import AllProduct from "./pages/AllProduct"
+
 
 function App() {
 
@@ -52,6 +56,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/all-products" element={<AllProduct />} />
+          <Route path="/all-user" element={<Alluser />} />
         </Routes>
 
       </div>
