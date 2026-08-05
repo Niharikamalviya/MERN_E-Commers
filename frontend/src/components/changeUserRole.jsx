@@ -6,7 +6,9 @@ const changeUserRole = ({
     name,
     email,
     role,
-    onClose
+    onClose,
+    userId,
+    callFunc,
 }) => {
     const [userRole, setUserRole] = useState(role)
 
@@ -25,6 +27,7 @@ const changeUserRole = ({
                 "content-type": "application/json"
             },
             body: JSON.stringify({
+                userId: userId,
                 role: userRole
             })
         })
@@ -34,6 +37,7 @@ const changeUserRole = ({
         if (responseData.success) {
             toast.success(responseData.message)
             onClose()
+            callFunc()
         }
 
         console.log("role update", responseData)

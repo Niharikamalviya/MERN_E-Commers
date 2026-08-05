@@ -8,6 +8,7 @@ import summaryApi from '../common'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserDetails } from '../slices/userSlice'
 import { useState } from 'react'
+import ROLE from "../common/role"
 
 const Header = () => {
 
@@ -60,21 +61,36 @@ const Header = () => {
                 <div className="flex itemx-center gap-7">
                     {/* user Icon */}
                     <div className="relative flex justify-center">
-                        <div className="text-3xl cursor-pointer"
-                            onClick={() => setMenuDisplay(preve => !preve)}>
-                            {
-                                user?.profilePic ? (
-                                    <img src={user?.profilePic}
-                                        className="w-10 h-10 rounded-full" alt={user?.name} />
-                                ) : (<FaRegUserCircle />)
-                            }
-                        </div>
+
+                        {
+                            user?._id && (
+                                <div className="text-3xl cursor-pointer"
+                                    onClick={() => setMenuDisplay(preve => !preve)}>
+                                    {
+                                        user?.profilePic ? (
+                                            <img src={user?.profilePic}
+                                                className="w-10 h-10 rounded-full" alt={user?.name} />
+                                        ) : (<FaRegUserCircle />)
+                                    }
+                                </div>
+                            )
+                        }
+
+                        {/* admin-panel */}
                         {
                             menuDisplay && (
                                 <div className=" absolute bg-white bottom-0 top-11 h-fit p-1 rounded shadow-lg  ">
+
                                     <nav>
-                                        <Link to={"/admin-panel"}
-                                            className="whitespace-nowrap text-lg hover:bg-slate-100 p-2">Admin panel</Link>
+
+                                        {
+                                            user?.role === ROLE.ADMIN && (
+                                                <Link to={"/admin-panel"}
+                                                    className="whitespace-nowrap text-lg hover:bg-slate-100 p-2">Admin panel</Link>
+
+                                            )
+                                        }
+
                                     </nav>
                                 </div>
                             )

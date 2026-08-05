@@ -11,7 +11,8 @@ const AllUser = () => {
     const [updateUser, setUpdateUser] = useState({
         email: " ",
         name: " ",
-        role: " "
+        role: " ",
+        _id: " "
 
     })
 
@@ -40,11 +41,13 @@ const AllUser = () => {
     return (
         <div className="pb-4">
             <table classname="w-full border text-base font-medium bg-white">
-                <thead>
+                <thead className="bg-black text=white">
                     <th>sr.</th>
                     <th>Name</th>
+                    <th>Email</th>
                     <th>Role</th>
                     <th>Created Date</th>
+                    <th>Action</th>
                 </thead>
                 <tbody>
                     {
@@ -80,7 +83,10 @@ const AllUser = () => {
                         onClose={() => setOpenUpdateRole(false)}
                         name={updateUser.name}
                         email={updateUser.email}
-                        role={updateUser.role} />
+                        role={updateUser.role}
+                        userId={updateUser._id}
+                        callFunc={fetchAllUser} />
+
                 )
             }
 
