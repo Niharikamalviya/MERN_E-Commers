@@ -3,6 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import ProductCategory from '../helpers/productCategory'
 import { FaCloudUploadAlt } from "react-icons/fa";
 import uploadImage from '../helpers/uploadImage'
+import { MdDelete } from "react-icons/md";
 
 
 const uploadProduct = (
@@ -10,6 +11,14 @@ const uploadProduct = (
 ) => {
 
     const handleOnChange = (e) => {
+        const { name, value } = e.target
+
+        setData((preve) => {
+            return {
+                ...preve,
+                [name]: value
+            }
+        })
 
     }
 
@@ -41,8 +50,22 @@ const uploadProduct = (
 
     const [openFullImage, setOpenFullImage] = useState(false)
     const [fullScreenImage, setFullScreenImage] = useSate("")
-
     const [uploadProductImageInput, setUploadProductImageInput] = useState("")
+
+    const handleDeleteImage = async (index) => {
+        console.log("image index", index)
+
+        const newProductImage = { ...data.productImage }
+        newProductImage.splice(index, 1)
+
+        setData((preve) => {
+            return {
+                ...preve,
+                productImage: [...newProductImage]
+            }
+        })
+
+    }
     return (
         <div className="absolute w-full h-full right-0 top-0 left-0 bottom-0 flex justify-center items-center">
             <div className="bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden">
@@ -121,17 +144,24 @@ const uploadProduct = (
                             data?.productImage[0] ? (
                                 <div className="flex items-center gap-2">
                                     {
-                                        data.productImage.map(ele => {
+                                        data.productImage.map((ele, index) => {
                                             return (
-                                                <img src={el} width={80} height={100}
-                                                    className="bg-slate-100 border cursor-pointer"
-                                                    onClick={() => {
-                                                        setopenFullImage(true)
-                                                        setFullScreenImage(el)
+                                                <div className="relative group">
+                                                    <img src={el} width={80} height={80}
+                                                        className="bg-slate-100 border cursor-pointer"
+                                                        onClick={() => {
+                                                            setopenFullImage(true)
+                                                            setFullScreenImage(el)
 
-                                                    }}
+                                                        }} />
 
-                                                />
+                                                    <div className="absolute bottom-0 right-0 p-1 text-white bg-red-600 rounded-full hidden group-hover:block cursor-pointer"
+                                                        onClick={() => handleDeleteImage(index)}>
+                                                        <MdDelete />
+                                                    </div>
+
+
+                                                </div>
                                             )
                                         })
                                     }
@@ -143,31 +173,49 @@ const uploadProduct = (
 
                     </div>
 
-                    <button className="px-3 py-2 hover:bg-red-700 bg-red-600 text-white mb-6">Upload Product</button>
 
-                    {/* description */}
 
-                    <label htmlfor='productName'>Description</label>
-                    <input type='text'
-                        id="productName"
-                        placeholder="Enter product name "
-                        value={data.productName}
-                        name="productName"
-                        onChange={handleOnChange}
-                        className="p-2 bg-slate-100 border rounded"
-                    />
 
                     {/* price       */}
 
-                    <label htmlfor='productName'>Product Name</label>
-                    <input type='text'
-                        id="productName"
-                        placeholder="Enter product name "
-                        value={data.productName}
-                        name="productName"
+                    <label htmlfor='price'>Price</label>
+                    <input type='number'
+                        id="price"
+                        placeholder="Enter price"
+                        value={data.price}
+                        name="price"
                         onChange={handleOnChange}
                         className="p-2 bg-slate-100 border rounded"
                     />
+
+                    {/* selling price       */}
+
+                    <label htmlfor='sellingPrice'>Price</label>
+                    <input type='number'
+                        id="sellingPrice"
+                        placeholder="Enter sellingPrice"
+                        value={data.sellingPrice}
+                        name="sellingPrice"
+                        onChange={handleOnChange}
+                        className="p-2 bg-slate-100 border rounded"
+                    />
+
+
+                    {/* description */}
+
+                    <label htmlfor='Description'>Description</label>
+                    <input type='text'
+                        id="Description"
+                        placeholder="Enter Description"
+                        value={data.Description}
+                        name="Description"
+                        onChange={handleOnChange}
+                        className="p-2 bg-slate-100 border rounded"
+                    />
+
+                    {/* upload button */}
+
+                    <button className="px-3 py-2 hover:bg-red-700 bg-red-600 text-white mb-6">Upload Product</button>
                 </form>
 
 
