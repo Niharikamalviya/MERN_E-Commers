@@ -7,7 +7,8 @@ import { MdDelete } from "react-icons/md";
 
 
 const uploadProduct = (
-    onClose
+    onClose,
+    fetchData
 ) => {
 
     const handleOnChange = (e) => {
@@ -45,7 +46,7 @@ const uploadProduct = (
         productImage: [],
         description: "",
         price: "",
-        selling: ""
+        sellingPrice: ""
     })
 
     const [openFullImage, setOpenFullImage] = useState(false)
@@ -86,6 +87,7 @@ const uploadProduct = (
         if (productResponse.success) {
             toast.success(productResponse?.message)
             onClose()
+            fetchData()
         }
 
 
@@ -227,7 +229,7 @@ const uploadProduct = (
 
                     {/* selling price   */}
 
-                    <label htmlfor='sellingPrice'>Price</label>
+                    <label htmlfor='sellingPrice'>selling Price</label>
                     <input type='number'
                         id="sellingPrice"
                         placeholder="Enter sellingPrice"

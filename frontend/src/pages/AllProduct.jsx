@@ -29,11 +29,12 @@ const AllProduct = () => {
 
             {/* all product */}
 
-            <div className="flex items-center gap-5 py-4">
+            <div className="flex items-center gap-5 py-4 flex-wrap  h-min[calc(100vh-200px)] overflow-y-auto">
                 {
                     allProduct.map((product, index) => {
                         return (
-                            <AdminProductCard data={product} key={index, "allProduct"} />
+                            <AdminProductCard data={product} key={index, "allProduct"}
+                                fetchdata={fetchAllProduct} />
 
                         )
                     })
@@ -45,7 +46,8 @@ const AllProduct = () => {
             {
                 openUploadProduct && (
                     <UploadProduct
-                        onClose={() => setOpenUploadProduct(false)} />
+                        onClose={() => setOpenUploadProduct(false)}
+                        fetchdata={fetchAllProduct} />
                 )
             }
 

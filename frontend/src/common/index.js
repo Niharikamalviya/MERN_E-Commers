@@ -32,6 +32,10 @@ const summaryApi = {
     allProduct: {
         url: `${BASE_URL}/get-products`,
         method: "get"
+    },
+    updateProduct: {
+        url: `${BASE_URL} /update-product`,
+        method: "post"
     }
 
 }
