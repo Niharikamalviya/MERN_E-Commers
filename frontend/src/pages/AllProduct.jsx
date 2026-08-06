@@ -3,6 +3,19 @@ import UploadProduct from '../components/UploadProduct'
 
 const AllProduct = () => {
     const [openUploadProduct, setOpenUploadProduct] = useState(false)
+    const [allProduct, setAllProduct] = useState([])
+
+    const fetchAllProduct = async () => {
+        const response = await fetch(summaryApi.allProduct.url, {
+            method: summaryApi.allProduct.method,
+        })
+
+        setAllProduct(dataResponse?.data || [])
+    }
+
+    useEffect(() => {
+        fetchAllProduct()
+    }, [])
     return (
         <div>
 
@@ -12,6 +25,19 @@ const AllProduct = () => {
                     onClick={() => setOpenUploadProduct(true)}
                 >Upload Product</button>
 
+            </div>
+
+            {/* all product */}
+
+            <div className="flex items-center gap-5 py-4">
+                {
+                    allProduct.map((product, index) => {
+                        return (
+                            <AdminProductCard data={product} key={index, "allProduct"} />
+
+                        )
+                    })
+                }
             </div>
 
             {/* uplaod product components */}
@@ -25,7 +51,7 @@ const AllProduct = () => {
 
 
 
-        </div>
+        </div >
     )
 
 }

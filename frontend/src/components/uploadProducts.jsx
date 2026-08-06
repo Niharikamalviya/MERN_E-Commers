@@ -66,6 +66,34 @@ const uploadProduct = (
         })
 
     }
+
+    //  submit product upload data
+
+    const handleUploadProoduct = async (e) => {
+        e.preventDefault()
+        console.log("data", data)
+        const productResponse = await fetch(summaryApi.uploadProduct.url, {
+            method: summaryApi.uploadProduct.method,
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+
+        const productResponse = await productResponse.json()
+
+        if (productResponse.success) {
+            toast.success(productResponse?.message)
+            onClose()
+        }
+
+
+        if (productResponse.error) {
+            toast.error(productResponse?.message)
+        }
+    }
+
     return (
         <div className="absolute w-full h-full right-0 top-0 left-0 bottom-0 flex justify-center items-center">
             <div className="bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden">
@@ -83,7 +111,8 @@ const uploadProduct = (
                 </div>
 
                 {/* form product data */}
-                <form className="grid p-4 gap-1 overflow-y-scroll h-full pb-5">
+                <form className="grid p-4 gap-1 overflow-y-scroll h-full pb-5"
+                    onSubmit={handleUploadProoduct}>
 
                     {/* product name */}
                     <label htmlfor='productName'>Product Name :</label>
@@ -93,6 +122,7 @@ const uploadProduct = (
                         value={data.productName}
                         name="productName"
                         onChange={handleOnChange}
+                        required
                         className="p-2 bg-slate-100 border rounded" />
 
                     {/* brand name */}
@@ -103,6 +133,7 @@ const uploadProduct = (
                         value={data.brandName}
                         name="brandName"
                         onChange={handleOnChange}
+                        required
                         className="p-2 bg-slate-100 border rounded"
                     />
 
@@ -114,7 +145,9 @@ const uploadProduct = (
                         {
                             ProductCategory.map((el, index) => {
                                 return (
-                                    <option value={el.value} key={index}>{el.label}</option>
+                                    <option value="" key={index} className="text-slate-700"
+                                        required
+                                        onChnage={handleOnChange}>select category</option>
                                 )
                             })
 
@@ -133,7 +166,10 @@ const uploadProduct = (
                                     <FaCloudUploadAlt />
                                 </span>
                                 <p className="text-sm">Upload Product Image</p>
-                                <input type='file' id='uploadImage' className="hidden"
+                                <input type='file'
+                                    id='uploadImage'
+                                    className="hidden"
+                                    required
                                     onChange={handleUploadProduct} />
                             </div>
 
@@ -149,6 +185,7 @@ const uploadProduct = (
                                                 <div className="relative group">
                                                     <img src={el} width={80} height={80}
                                                         className="bg-slate-100 border cursor-pointer"
+                                                        required
                                                         onClick={() => {
                                                             setopenFullImage(true)
                                                             setFullScreenImage(el)
@@ -176,7 +213,7 @@ const uploadProduct = (
 
 
 
-                    {/* price       */}
+                    {/* price   */}
 
                     <label htmlfor='price'>Price</label>
                     <input type='number'
@@ -188,7 +225,7 @@ const uploadProduct = (
                         className="p-2 bg-slate-100 border rounded"
                     />
 
-                    {/* selling price       */}
+                    {/* selling price   */}
 
                     <label htmlfor='sellingPrice'>Price</label>
                     <input type='number'
@@ -204,14 +241,14 @@ const uploadProduct = (
                     {/* description */}
 
                     <label htmlfor='Description'>Description</label>
-                    <input type='text'
-                        id="Description"
-                        placeholder="Enter Description"
-                        value={data.Description}
-                        name="Description"
+                    <textarea className="h-28 bg-slate-100 border resize-none p-1 "
+                        rows={3}
+                        placeholder="enter prooduct description"
                         onChange={handleOnChange}
-                        className="p-2 bg-slate-100 border rounded"
-                    />
+                        value={data.Description}
+                        name="Description">
+
+                    </textarea>
 
                     {/* upload button */}
 
