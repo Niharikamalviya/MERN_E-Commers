@@ -6,7 +6,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
 
-const HorizontalCardProduct = ({ category, heading }) => {
+const VerticalCardProduct = ({ category, heading }) => {
 
     const [data, setData] = useState([])
     const [loading, setLoading] = useState([])
@@ -46,7 +46,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
             </h2>
 
             {/* product image */}
-            <div className="flex items-center gap-4 md:gap-6 overflow-scroll scrollbar-none traansition-all "
+            <div className="flex items-center gap-4 md:gap-6 overflow-x-scroll scrollbar-none transition-all "
                 ref={scrollElement}>
 
                 {/* button scroll */}
@@ -57,27 +57,28 @@ const HorizontalCardProduct = ({ category, heading }) => {
                         onClick={scrollRight}><IoIosArrowForward /></button>
                 </div>
 
+
                 {
                     loading ? (
 
                         loadingList.map((product, index) => {
                             return (
-                                <div className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
-                                    <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px] animate-pulse">
+                                <div className="w-full min-w-[280px]  md:min-w-[320px] max-w-[280px] md:max-w-[320px]  bg-white  rounded-sm shadow-md">
+                                    {/* image */}
+                                    <div className="bg-slate-200 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center  bg-slate-200 animate-pulse"></div>
 
-                                    </div>
-                                    <div className="p-4 grid w-full gap-2 ">
-                                        <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1 bg-slate-200 rounded-full animate-pulse p-1"></h2>
-                                        <p className="capitalize text-slate-500 p-1 bg-slate-200 rounded-full animate-pulse"></p>
+                                    <div className="p-4 grid gap-3 w-full">
+                                        <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1  bg-slate-200 rounded-full animate-pulse p-1 py-2"></h2>
+                                        <p className="capitalize text-slate-500  bg-slate-200 rounded-full animate-pulse p-1 py-2"></p>
                                     </div>
 
                                     <div className="flex gap-3">
-                                        <p className="w-full  p-1 bg-slate-200 rounded-full animate-pulse"></p>
-                                        <p className="w-full  p-1 bg-slate-200 rounded-full animate-pulse"></p>
+                                        <p className="w-full font-medium  bg-slate-200 rounded-full animate-pulse p-1 py-2"></p>
+                                        <p className="w-full bg-slate-200 rounded-full animate-pulse p-1 py-2 "></p>
                                     </div>
 
                                     <div>
-                                        <button className="text-sm text-white px-2 py-1 rounded-full  w-full bg-slate-200 animate-pulse"></button>
+                                        <button className="text-sm  px-2 py-1  bg-slate-200 rounded-full animate-pulse p-1 py-2"></button>
                                     </div>
 
 
@@ -86,16 +87,17 @@ const HorizontalCardProduct = ({ category, heading }) => {
                                 </div>
                             )
                         })
-                    ) : (
 
+
+                    ) : (
 
                         data.map((product, index) => {
                             return (
-                                <div className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
-                                    <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]">
-                                        <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all" />
+                                <div className="w-full min-w-[280px]  md:min-w-[320px] max-w-[280px] md:max-w-[320px]  bg-white  rounded-sm shadow-md">
+                                    <div className="bg-slate-200 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center">
+                                        <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all mix-blend-multipy" />
                                     </div>
-                                    <div className="p-4 grid ">
+                                    <div className="p-4 grid gap-3">
                                         <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1 ">
                                             {product?.productName}</h2>
                                         <p className="capitalize text-slate-500">
@@ -120,13 +122,10 @@ const HorizontalCardProduct = ({ category, heading }) => {
 
                     )
                 }
-
-
-
             </div>
 
         </div>
     )
 
 }
-export default HorizontalCardProduct
+export default VerticalCardProduct

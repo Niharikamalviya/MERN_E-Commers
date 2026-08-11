@@ -47,7 +47,7 @@ function App() {
         fetchUserDetails
 
       }}> */}
-      <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden">
+      <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden pt-16">
         <Header />
         <Toaster />
 
