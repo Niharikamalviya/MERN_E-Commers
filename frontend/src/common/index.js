@@ -48,6 +48,10 @@ const summaryApi = {
     productDetails: {
         url: `${BASE_URL}/product-details`,
         method: "post"
+    },
+    addToCart: {
+        url: `${BASE_URL}/addtocart`,
+        method: "post"
     }
 
 }
