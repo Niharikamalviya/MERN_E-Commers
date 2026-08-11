@@ -91,7 +91,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
 
                         data.map((product, index) => {
                             return (
-                                <div className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
+                                <Link to={"product-Details/" + product?._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
                                     <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]">
                                         <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all" />
                                     </div>
@@ -108,13 +108,14 @@ const HorizontalCardProduct = ({ category, heading }) => {
                                     </div>
 
                                     <div>
-                                        <button className="text-sm bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-full ">Add to cart</button>
+                                        <button className="text-sm bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-full "
+                                            onClick={(e) => addToCart(e.product?._id)}>Add to cart</button>
                                     </div>
 
 
 
 
-                                </div>
+                                </Link>
                             )
                         })
 

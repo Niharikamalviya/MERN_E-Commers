@@ -16,6 +16,7 @@ import summaryApi from "./common/index"
 import AdminPanel from "./pages/adminPanel";
 import Alluser from "./pages/AllUser";
 import AllProduct from "./pages/AllProduct"
+import ProductDetails from "./pages/ProductDetails"
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/all-products" element={<AllProduct />} />
           <Route path="/all-user" element={<Alluser />} />
+          <Route path="/product-Details/:id" element={<ProductDetails />} />
         </Routes>
 
       </div>
