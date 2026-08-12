@@ -23,7 +23,7 @@ exports.addToCart = async (req, res) => {
         const newAddToCart = new Cart.find(payload)
         const saveProduct = await newAddToCart.save()
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: " Prooduct add successfully in cart"
         })

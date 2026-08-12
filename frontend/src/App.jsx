@@ -17,11 +17,13 @@ import AdminPanel from "./pages/adminPanel";
 import Alluser from "./pages/AllUser";
 import AllProduct from "./pages/AllProduct"
 import ProductDetails from "./pages/ProductDetails"
+import Cart from "./pages/cart"
 
 
 function App() {
 
   const dispatch = useDispatch()
+  const [cartProductCount, setCartProductCount] = useState(0)
 
   // const fetchUserDetails = async () => {
   //   const dataResponse = await fetch(summaryApi.current_user.url, {
@@ -36,17 +38,36 @@ function App() {
   //   }
   //   console.log("data-user", dataResponse)
   // }
-  // useEffect(() => {
-  //   // user Details
-  //   fetchUserDetails();
-  // })
+
+  const fetchUserAddToCart = async () => {
+    const dataResponse = await fetch(summaryApi.countAddToCart.url, {
+      method: summaryApi.countAddToCart.method,
+      credentials: 'include'
+
+    })
+    const dataApi = await dataResponse.json()
+
+
+    console.log("add to cart", dataResponse)
+    setCartProductCount(dataApi?.data?.count)
+
+  }
+  useEffect(() => {
+    // user Details
+    fetchUserDetails();
+
+    // cart product
+    fetchUserAddToCart()
+  })
+
 
 
   return (
     <>
       {/* <Context.Provider value={{
-        fetchUserDetails
-
+        fetchUserDetails,
+        cartProductCount,
+        fetchUserAddToCart
       }}> */}
       <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden pt-16">
         <Header />
@@ -60,6 +81,7 @@ function App() {
           <Route path="/all-products" element={<AllProduct />} />
           <Route path="/all-user" element={<Alluser />} />
           <Route path="/product-Details/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
 
       </div>

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setUserDetails } from '../slices/userSlice'
 import { useState } from 'react'
 import ROLE from "../common/role"
+import Context from '../context'
 
 const Header = () => {
 
@@ -17,6 +18,7 @@ const Header = () => {
     const dispatch = useDispatch()
     console.log("user-header", user)
     const [menuDisplay, setMenuDisplay] = useState(false)
+    const context = useContext(Context)
 
     // logout handler
     const handleLogout = async () => {
@@ -99,16 +101,24 @@ const Header = () => {
 
                     </div>
 
-                    {/* shooping card */}
-                    <div className="text-3xl relative">
-                        <span>
-                            <FaShoppingCart />
-                        </span>
-                        <div className="bg-red-600 text-white w-5 p-1 flex justify-center items-center h-5 rounded-full absolute -top-2 -right-2">
-                            <p className="text-xs">0</p>
-                        </div>
+                    {/* shooping cart */}
 
-                    </div>
+
+                    {
+                        user?._id && (
+                            <Link to="/cart" className="text-3xl relative">
+                                <span>
+                                    <FaShoppingCart />
+                                </span>
+                                <div className="bg-red-600 text-white w-5 p-1 flex justify-center items-center h-5 rounded-full absolute -top-2 -right-2">
+                                    <p className="text-xs">{context?.cartProductCount}</p>
+                                </div>
+                            </Link>
+                        )
+                    }
+
+
+
 
                     {/* login button */}
 

@@ -52,7 +52,16 @@ const summaryApi = {
     addToCart: {
         url: `${BASE_URL}/addtocart`,
         method: "post"
+    },
+    countAddToCart: {
+        url: `${BASE_URL}/countAddToCart`,
+        method: "get"
+    },
+    addToCartView: {
+        url: `${BASE_URL}/View-cart-product`,
+        method: "get"
     }
+
 
 }
 

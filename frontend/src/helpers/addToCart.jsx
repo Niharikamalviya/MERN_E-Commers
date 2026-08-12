@@ -24,6 +24,11 @@ const addToCart = (e, id) => {
 
     }
 
+    if (responseData.error) {
+        toast.error(responseData.message)
+
+    }
+
 }
 
 export default addToCart

@@ -23,7 +23,12 @@ const VerticalCardProduct = ({ category, heading }) => {
         console.log("horizontal data", categoryProduct.data)
         setData(categoryProduct?.data)
     }
+    const { fetchUserAddToCart } = useContext(Context)
 
+    const handleAddToCart = async (e, id) => {
+        await addToCart(e, id)
+        fetchUserAddToCart()
+    }
 
     useEffect(() => {
         fetchData()
@@ -111,7 +116,7 @@ const VerticalCardProduct = ({ category, heading }) => {
 
                                     <div>
                                         <button className="text-sm bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-full "
-                                            onClick={(e) => addToCart(e.product?._id)}>Add to cart</button>
+                                            onClick={(e) => handleAddToCart(e.product?._id)}>Add to cart</button>
                                     </div>
 
 

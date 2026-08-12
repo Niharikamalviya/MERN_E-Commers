@@ -20,7 +20,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     //context API
-    // const { fetchUserDetails } = useContext(Context)
+    // const { fetchUserDetails, fetchUserAddToCart } = useContext(Context)
     // console.log("generalContext", generalContext.fetchUserDetails())
 
     //change handler
@@ -53,6 +53,7 @@ const Login = () => {
             toast.success(loginData.meesage)
             navigate('/')
             // fetchUserDetails()
+            fetchUserAddToCart()
 
             console.log("data login", loginData)
 
