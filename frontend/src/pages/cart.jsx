@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { RiDeleteBin7Fill } from "react-icons/ri";
+
 
 const Cart = () => {
 
@@ -33,6 +35,84 @@ const Cart = () => {
     useEffect(() => {
         fetchData()
     }, [])
+
+    const increaseQty = async (id) => {
+        const response = await fetch(summaryApi.updateCartProduct.url, {
+            method: summaryApi.updateCartProduct.method,
+            credentails: "include",
+            headers: {
+                "content-type": "application/json"
+            },
+
+            body: Json.stringify(
+                {
+                    _id: id,
+                    quantity: qty + 1
+                }
+            )
+
+        })
+
+        const responseData = await response.json()
+
+        if (responseData.success) {
+            fetchData()
+        }
+    }
+
+    const decreaseQty = async (id) => {
+        if (qty >= 2) {
+            const response = await fetch(summaryApi.updateCartProduct.url, {
+                method: summaryApi.updateCartProduct.method,
+                credentails: "include",
+                headers: {
+                    "content-type": "application/json"
+                },
+
+                body: Json.stringify(
+                    {
+                        _id: id,
+                        quantity: qty - 1
+                    }
+                )
+
+            })
+
+            const responseData = await response.json()
+
+            if (responseData.success) {
+                fetchData()
+            }
+        }
+    }
+
+    const deleteCartProduct = async (id) => {
+
+        const response = await fetch(summaryApi.deleteCartProduct.url, {
+            method: summaryApi.deleteCartProduct.method,
+            credentails: "include",
+            headers: {
+                "content-type": "application/json"
+            },
+
+            body: Json.stringify(
+                {
+                    _id: id,
+
+                }
+            )
+
+        })
+
+        const responseData = await response.json()
+
+        if (responseData.success) {
+            fetchData()
+            context.fetchUserAddToCart()
+        }
+
+    }
+
     return (
         <div className="container mx-auto">
 
@@ -64,10 +144,32 @@ const Cart = () => {
 
                             data.map((product, index) => {
                                 return (
-                                    <div key={index} className="w-full bg-white h-32 my-2 border-slate-300 animate-pulse rounded">
+                                    <div key={index} className="w-full bg-white h-32 my-2 border-slate-300 animate-pulse rounded grid grid-cols-[128px, 1fr]">
                                         <div className="w-32 h-full bg-slate-200">
                                             <img src={product?.productId?.productImage[0]} className="w-full h-full object-scale-down mix-blend-multipy" />
                                         </div>
+                                        <div className="px-4 py-2 relative">
+
+                                            {/* delete cart  */}
+                                            <div className="absolute right-0 text-red-600 rounded-full hover:text-white hover:bg-red-600 cursor-pointer"
+                                                onClick={() => deleteCartProduct(product?._id)}>
+                                                <RiDeleteBin7Fill />
+                                            </div>
+
+                                            <h2 className="text-lg lg:text-2xl text-ellipsis line-clamp-1"> {product?.productId?.productName}</h2>
+                                            <p className="capitalize text-slate-500 ">{product?.productId?.category}</p>
+                                            <p className="font-medium text-lg text-red-600">{displayINRCurrency(product?.productId?.sellingPrice)}</p>
+
+                                            <div className="flex items-center gap-3">
+                                                <button className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center rounded hover:bg-red-600 hover:text-white"
+                                                    onClick={() => decreaseQty(product?.id, product?.quantity)}>-</button>
+                                                <spna>{product?.quantity}</spna>
+                                                <button className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center rounded hover:bg-red-600 hover:text-white"
+                                                    onClick={() => increaseQty(product?.id, product?.quantity)}>+</button>
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 )
                             })

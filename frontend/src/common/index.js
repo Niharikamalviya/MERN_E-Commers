@@ -60,6 +60,14 @@ const summaryApi = {
     addToCartView: {
         url: `${BASE_URL}/View-cart-product`,
         method: "get"
+    },
+    updateCartProduct: {
+        url: `${BASE_URL}/update-Cart-product`,
+        method: "post"
+    },
+    deleteCartproduct: {
+        url: `${BASE_URL}/delete-Cart-Product`,
+        method: "post"
     }
 
 
