@@ -18,6 +18,7 @@ import Alluser from "./pages/AllUser";
 import AllProduct from "./pages/AllProduct"
 import ProductDetails from "./pages/ProductDetails"
 import Cart from "./pages/cart"
+import searchBar from "./pages/searchBar"
 
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
           <Route path="/all-user" element={<Alluser />} />
           <Route path="/product-Details/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/search" element={<searchBar />} />
         </Routes>
 
       </div>

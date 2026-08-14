@@ -57,71 +57,73 @@ const categoryWiseProductDisplay = ({ category, heading }) => {
                     <button className="absolute-rigth-0 bg-white shadow-md rounded-full p-1 hidden md:block"
                         onClick={scrollRight}><IoIosArrowForward /></button>
                 </div>
+                <div className="grid grid-cols md:gap-6 justify-center overflow-hidden">
+                    {
+                        loading ? (
 
-                {
-                    loading ? (
+                            loadingList.map((product, index) => {
+                                return (
+                                    <div className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
+                                        <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px] animate-pulse">
 
-                        loadingList.map((product, index) => {
-                            return (
-                                <div className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
-                                    <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px] animate-pulse">
+                                        </div>
+                                        <div className="p-4 grid w-full gap-2 ">
+                                            <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1 bg-slate-200 rounded-full animate-pulse p-1"></h2>
+                                            <p className="capitalize text-slate-500 p-1 bg-slate-200 rounded-full animate-pulse"></p>
+                                        </div>
+
+                                        <div className="flex gap-3">
+                                            <p className="w-full  p-1 bg-slate-200 rounded-full animate-pulse"></p>
+                                            <p className="w-full  p-1 bg-slate-200 rounded-full animate-pulse"></p>
+                                        </div>
+
+                                        <div>
+                                            <button className="text-sm text-white px-2 py-1 rounded-full  w-full bg-slate-200 animate-pulse"></button>
+                                        </div>
+
+
+
 
                                     </div>
-                                    <div className="p-4 grid w-full gap-2 ">
-                                        <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1 bg-slate-200 rounded-full animate-pulse p-1"></h2>
-                                        <p className="capitalize text-slate-500 p-1 bg-slate-200 rounded-full animate-pulse"></p>
-                                    </div>
-
-                                    <div className="flex gap-3">
-                                        <p className="w-full  p-1 bg-slate-200 rounded-full animate-pulse"></p>
-                                        <p className="w-full  p-1 bg-slate-200 rounded-full animate-pulse"></p>
-                                    </div>
-
-                                    <div>
-                                        <button className="text-sm text-white px-2 py-1 rounded-full  w-full bg-slate-200 animate-pulse"></button>
-                                    </div>
+                                )
+                            })
+                        ) : (
 
 
+                            data.map((product, index) => {
+                                return (
+                                    <Link to={"product-Details/" + product?._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
+                                        <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]">
+                                            <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all" />
+                                        </div>
+                                        <div className="p-4 grid ">
+                                            <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1 ">
+                                                {product?.productName}</h2>
+                                            <p className="capitalize text-slate-500">
+                                                {product?.category}</p>
+                                        </div>
 
+                                        <div className="flex gap-3">
+                                            <p className="font-medium text-red-500">{displayINRCurrency(product?.sellingPrice)}</p>
+                                            <p className="text-slate-500 line-through">{displayINRCurrency(product?.price)}</p>
+                                        </div>
 
-                                </div>
-                            )
-                        })
-                    ) : (
-
-
-                        data.map((product, index) => {
-                            return (
-                                <Link to={"product-Details/" + product?._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
-                                    <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]">
-                                        <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all" />
-                                    </div>
-                                    <div className="p-4 grid ">
-                                        <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1 ">
-                                            {product?.productName}</h2>
-                                        <p className="capitalize text-slate-500">
-                                            {product?.category}</p>
-                                    </div>
-
-                                    <div className="flex gap-3">
-                                        <p className="font-medium text-red-500">{displayINRCurrency(product?.sellingPrice)}</p>
-                                        <p className="text-slate-500 line-through">{displayINRCurrency(product?.price)}</p>
-                                    </div>
-
-                                    <div>
-                                        <button className="text-sm bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-full "
-                                            onClick={(e) => handleAddToCart(e.product?._id)}>Add to cart</button>
-                                    </div>
+                                        <div>
+                                            <button className="text-sm bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-full "
+                                                onClick={(e) => handleAddToCart(e.product?._id)}>Add to cart</button>
+                                        </div>
 
 
 
 
-                                </Link>
-                            )
-                        })
+                                    </Link>
+                                )
+                            })
 
-                    )
-                }
+                        )
+                    }
+
+                </div>
 
 
 

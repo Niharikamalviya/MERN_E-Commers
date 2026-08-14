@@ -113,6 +113,9 @@ const Cart = () => {
 
     }
 
+    const totalQty = data.reduce((previousValue, currentValue) => previousValue + currentValue.quantity, 0)
+    const totalPrice = data.reduce((preve, currentValue) => preve + (currentValue.quantity * currentValue?.productId?.sellingPrice), 0)
+
     return (
         <div className="container mx-auto">
 
@@ -158,7 +161,11 @@ const Cart = () => {
 
                                             <h2 className="text-lg lg:text-2xl text-ellipsis line-clamp-1"> {product?.productId?.productName}</h2>
                                             <p className="capitalize text-slate-500 ">{product?.productId?.category}</p>
-                                            <p className="font-medium text-lg text-red-600">{displayINRCurrency(product?.productId?.sellingPrice)}</p>
+
+                                            <div className="flex items-center justify-between">
+                                                <p className="font-medium text-lg text-red-600">{displayINRCurrency(product?.productId?.sellingPrice)}</p>
+                                                <p className="font-medium text-lg text-slate-600">{displayINRCurrency(product?.productId?.sellingPrice * product?.quantity)}</p>
+                                            </div>
 
                                             <div className="flex items-center gap-3">
                                                 <button className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center rounded hover:bg-red-600 hover:text-white"
@@ -184,11 +191,24 @@ const Cart = () => {
                     {
                         loading ? (
                             <div className="h-36 bg-slate-200 border border-slate-300 animate-pulse ">
-                                total
+
                             </div>
                         ) : (
-                            <div className="h-36 bg-slate-200">
-                                total
+                            <div className="h-36 bg-white">
+                                <h2 className="text-white bg-red-600 px-4 py-1" > Summary</h2>
+                                <div className="flex items-center justify-between p-4 gap-2 font-medium text-slate-600 text-lg">
+                                    <p>Quantity :</p>
+                                    <p>{totalQty}</p>
+                                </div>
+
+                                <div className="flex items-center justify-between p-4 gap-2 font-medium text-slate-600 text-lg">
+                                    <p>Total Price : </p>
+                                    <p>{displayINRCurrency(totalPrice)}</p>
+                                </div>
+
+                                <button className="bg-blue-600 p-2 text-white w-full mt-2 ">
+                                    Pay Now
+                                </button>
                             </div>
                         )
                     }

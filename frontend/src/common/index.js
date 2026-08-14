@@ -68,6 +68,10 @@ const summaryApi = {
     deleteCartproduct: {
         url: `${BASE_URL}/delete-Cart-Product`,
         method: "post"
+    },
+    searchBar: {
+        url: `${BASE_URL}/search-product`,
+        method: "post"
     }
 
 

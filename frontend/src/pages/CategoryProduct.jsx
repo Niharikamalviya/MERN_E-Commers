@@ -1,11 +1,16 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
-const Home = () => {
+
+const categoryProduct = () => {
+
+    const params = useParams()
+
     return (
         <div>
-            Home
+            {params?.categoryName}
         </div>
     )
 
 }
-export default Home
+export default categoryProduct

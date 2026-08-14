@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from './Logo'
 import { ImSearch } from "react-icons/im";
 import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from "react-hot-toast"
 import summaryApi from '../common'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,6 +10,7 @@ import { setUserDetails } from '../slices/userSlice'
 import { useState } from 'react'
 import ROLE from "../common/role"
 import Context from '../context'
+
 
 const Header = () => {
 
@@ -19,6 +20,7 @@ const Header = () => {
     console.log("user-header", user)
     const [menuDisplay, setMenuDisplay] = useState(false)
     const context = useContext(Context)
+    const navigate = useNavigate()
 
     // logout handler
     const handleLogout = async () => {
@@ -38,6 +40,22 @@ const Header = () => {
             toast.error(data.message)
         }
     }
+
+    // search handle
+
+    const handleSearch = (e) => {
+        const { value } = e.target
+
+        if (value) {
+            navigate(`/search?q=${value}`)
+        }
+        else {
+            navigate("/search")
+        }
+
+    }
+
+
     return (
         <header className='h-16 shadow-md bg-white fixed z-40'>
             <div className='h-full container mx-auto flex items-center px-4 justify-between'>
@@ -52,7 +70,8 @@ const Header = () => {
                 {/* search bar */}
                 <div className="hidden lg:flex items-center w-full justify-between max-w-sm border border-slate-300 rounded-full focus-within:shadow-md">
                     <input type='text' placeholder='search product here....'
-                        className="outline-none w-full pl-3" />
+                        className="outline-none w-full pl-3"
+                        onChange={handleSearch} />
                     <div className="text-lg min-w-[50px] h-8 bg-red-600 flex items-center rounded-r-full justify-center text-white">
                         <ImSearch />
                     </div>
