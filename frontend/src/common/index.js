@@ -72,6 +72,11 @@ const summaryApi = {
     searchBar: {
         url: `${BASE_URL}/search-product`,
         method: "post"
+    },
+    filterProduct: {
+        url: `${BASE_URL}/filter-product`,
+        method: "post"
+
     }
 
 
