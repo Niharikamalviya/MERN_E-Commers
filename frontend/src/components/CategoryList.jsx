@@ -1,9 +1,10 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
 
 const CategoryList = () => {
 
     const [categoryProduct, setCategoryProduct] = useState([])
-    const [loading, setLoading] = useSate(false)
+    const [loading, setLoading] = useState(false)
 
     const categoryLoading = new Array(13).fill(null)
 

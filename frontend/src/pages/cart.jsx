@@ -7,7 +7,7 @@ const Cart = () => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const context = useContext(Context)
-    const loading = new Array(context.cartProductCount).fill(null)
+    const loadingCart = new Array(context.cartProductCount).fill(null)
 
     const fetchData = async () => {
         setLoading(true)

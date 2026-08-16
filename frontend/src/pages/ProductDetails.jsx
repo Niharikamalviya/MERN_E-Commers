@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useparams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 import SummaryApi from '../common/index'
 import { FaStar } from "react-icons/fa6";
 import { FaStarHalfAlt } from "react-icons/fa";
@@ -26,7 +26,7 @@ const ProductDetails = () => {
 
     console.log("product id", params)
 
-    const fetchProductDetails = () => {
+    const fetchProductDetails = async () => {
         setLoanding(true)
         const resonse = await fetch(SummaryApi.productDetails.url, {
             method: SummaryApi.productDetails.method,

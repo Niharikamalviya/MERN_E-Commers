@@ -1,5 +1,5 @@
 import React from 'react'
-import ROLE from "./common/role"
+import ROLE from "../common/role"
 import { IoMdClose } from "react-icons/io";
 
 const changeUserRole = ({

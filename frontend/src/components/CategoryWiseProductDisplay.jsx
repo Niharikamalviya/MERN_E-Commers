@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import fetchCategoryWiseProduct from '../helpers/fetchCategoryWiseProduct'
-import Context from "../context"
+import Context from "../context/index"
 
 
 const categoryWiseProductDisplay = ({ category, heading }) => {

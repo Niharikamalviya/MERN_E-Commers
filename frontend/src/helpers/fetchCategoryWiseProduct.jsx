@@ -1,5 +1,5 @@
 
-const { default: summaryApi } = require("../common")
+const { default: summaryApi } = "../common/index"
 
 const fetchCategoryWiseProduct = async (category) => {
     const response = await fetch(summaryApi.categoryWieProduct.Url, {

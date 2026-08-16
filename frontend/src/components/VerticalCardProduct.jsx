@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import fetchCategoryWiseProduct from '../helpers/fetchCategoryWiseProduct'
 import { IoIosArrowBack } from "react-icons/io";
-
+import Context from "../context/index";
 import { IoIosArrowForward } from "react-icons/io";
 
 
@@ -34,7 +34,7 @@ const VerticalCardProduct = ({ category, heading }) => {
         fetchData()
     }, [])
 
-    const scollRight = () => {
+    const scrollRight = () => {
         scrollElement.current.scrollLeft += 300
     }
 

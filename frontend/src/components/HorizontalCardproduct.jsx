@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import fetchCategoryWiseProduct from '../helpers/fetchCategoryWiseProduct'
 import { IoIosArrowBack } from "react-icons/io";
-
+import Context from "../context/index";
 import { IoIosArrowForward } from "react-icons/io";
 
 
@@ -23,7 +23,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
         console.log("horizontal data", categoryProduct.data)
         setData(categoryProduct?.data)
     }
-    const { fetchUserAddToCart } = useContext(Context)
+    const { fetchUserAddToCart } = useContext(Context);
 
     const handleAddToCart = async (e, id) => {
         await addToCart(e, id)
@@ -34,7 +34,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
         fetchData()
     }, [])
 
-    const scollRight = () => {
+    const scrollRight = () => {
         scrollElement.current.scrollLeft += 300
     }
 

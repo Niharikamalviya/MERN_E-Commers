@@ -1,9 +1,9 @@
 import React from 'react'
-import summaryApi from "./common/index"
+import summaryApi from "../common/index"
 import toast from "react-hot-toast"
-import moment from 'momment'
+// import moment from 'momment'
 import { MdEdit } from "react-icons/md";
-import changeUserRole from "../compoments/changeUserRole"
+import changeUserRole from "../components/changeUserRole"
 
 const AllUser = () => {
     const [alluser, setAllUser] = useState([])

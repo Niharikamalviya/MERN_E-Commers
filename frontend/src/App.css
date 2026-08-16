@@ -12,7 +12,7 @@
 }
 
 .userTable td {
-  @apply border test-base text-center
+  @apply border text-base text-center
 }
 
 .scrollbar-none::-webkit-scrollbar {

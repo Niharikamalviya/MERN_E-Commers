@@ -26,19 +26,19 @@ function App() {
   const dispatch = useDispatch()
   const [cartProductCount, setCartProductCount] = useState(0)
 
-  // const fetchUserDetails = async () => {
-  //   const dataResponse = await fetch(summaryApi.current_user.url, {
-  //     method: summaryApi.current_user.method,
-  //     credentials: 'include'
+  const fetchUserDetails = async () => {
+    const dataResponse = await fetch(summaryApi.current_user.url, {
+      method: summaryApi.current_user.method,
+      credentials: 'include'
 
-  //   })
-  //   const dataApi = await dataResponse.json()
+    })
+    const dataApi = await dataResponse.json()
 
-  //   if (dataApi.success) {
-  //     dispatch(setUserDetails(dataApi.data))
-  //   }
-  //   console.log("data-user", dataResponse)
-  // }
+    if (dataApi.success) {
+      dispatch(setUserDetails(dataApi.data))
+    }
+    console.log("data-user", dataResponse)
+  }
 
   const fetchUserAddToCart = async () => {
     const dataResponse = await fetch(summaryApi.countAddToCart.url, {
@@ -65,32 +65,32 @@ function App() {
 
   return (
     <>
-      {/* <Context.Provider value={{
+      <Context.Provider value={{
         fetchUserDetails,
         cartProductCount,
         fetchUserAddToCart
-      }}> */}
-      <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden pt-16">
-        <Header />
-        <Toaster />
+      }}>
+        <div className="bg-slate-100 w-full min-h-[calc(100vh-70px)] overflow-hidden pt-16">
+          <Header />
+          <Toaster />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/all-products" element={<AllProduct />} />
-          <Route path="/all-user" element={<Alluser />} />
-          <Route path="/product-Details/:id" element={<ProductDetails />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/search" element={<searchBar />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/all-products" element={<AllProduct />} />
+            <Route path="/all-user" element={<Alluser />} />
+            <Route path="/product-Details/:id" element={<ProductDetails />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/search" element={<searchBar />} />
+          </Routes>
 
-      </div>
-      <Footer />
+        </div>
+        <Footer />
 
 
-      {/* </Context.Provider> */}
+      </Context.Provider>
     </>
   )
 }

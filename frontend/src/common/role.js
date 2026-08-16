@@ -3,4 +3,4 @@ const ROLE = {
     GENERAL: "GENERAL"
 }
 
-export default Role
+export default ROLE

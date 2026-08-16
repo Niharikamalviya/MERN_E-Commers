@@ -23,7 +23,7 @@ const uploadProduct = (
 
     }
 
-    const handleUploadProduct = (e) => {
+    const handleUploadProduct = async (e) => {
         const file = e.target.files[0]
         setUploadProductImageInput(file.name)
         console.lpg("file", file)
@@ -73,7 +73,7 @@ const uploadProduct = (
     const handleUploadProoduct = async (e) => {
         e.preventDefault()
         console.log("data", data)
-        const productResponse = await fetch(summaryApi.uploadProduct.url, {
+        const dataResponse = await fetch(summaryApi.uploadProduct.url, {
             method: summaryApi.uploadProduct.method,
             credentials: "include",
             headers: {
@@ -82,7 +82,7 @@ const uploadProduct = (
             body: JSON.stringify(data)
         })
 
-        const productResponse = await productResponse.json()
+        const productResponse = await dataResponse.json()
 
         if (productResponse.success) {
             toast.success(productResponse?.message)

@@ -1,6 +1,6 @@
-const url = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_NAME}/Image/upload`
+const url = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_NAME}/image/upload`
 
-const uplaodImage = async (image) => {
+const uploadImage = async (image) => {
     const formData = new FormData()
     formData.append("file", image)
     formData.append("upload_preset",)

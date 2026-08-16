@@ -1,5 +1,5 @@
 import React from 'react'
-import UploadProduct from '../components/UploadProduct'
+import UploadProduct from '../components/uploadProducts'
 
 const AllProduct = () => {
     const [openUploadProduct, setOpenUploadProduct] = useState(false)
@@ -33,7 +33,7 @@ const AllProduct = () => {
                 {
                     allProduct.map((product, index) => {
                         return (
-                            <AdminProductCard data={product} key={index, "allProduct"}
+                            <AdminProductCard data={product} key={index + "allProduct"}
                                 fetchdata={fetchAllProduct} />
 
                         )
