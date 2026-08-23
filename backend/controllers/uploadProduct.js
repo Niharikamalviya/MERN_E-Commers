@@ -1,4 +1,4 @@
-const Product = require("../odels/productModel")
+const Product = require("../models/productModel")
 
 exports.uploadProduct = async (req, res) => {
     try {
