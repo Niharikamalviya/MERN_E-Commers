@@ -15,7 +15,7 @@ import Context from '../context'
 const Header = () => {
 
     // display user details on header
-    const user = useSelector(state => state?.user?.user)
+    const user = useSelector(state => state?.user)
     const dispatch = useDispatch()
     console.log("user-header", user)
     const [menuDisplay, setMenuDisplay] = useState(false)
@@ -125,7 +125,7 @@ const Header = () => {
 
                     {
                         user?._id && (
-                            <Link to="/cart" className="text-3xl relative">
+                            <Link to={"/cart"} className="text-3xl relative">
                                 <span>
                                     <FaShoppingCart />
                                 </span>

@@ -20,7 +20,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     //context API
-    // const { fetchUserDetails, fetchUserAddToCart } = useContext(Context)
+    const { fetchUserDetails, fetchUserAddToCart } = useContext(Context)
     // console.log("generalContext", generalContext.fetchUserDetails())
 
     //change handler
@@ -41,6 +41,7 @@ const Login = () => {
 
         const dataResponse = await fetch(summaryApi.login.url, {
             method: summaryApi.login.method,
+            credentials: 'include',
             headers: {
                 "content-type": "application/json"
             },
@@ -50,13 +51,13 @@ const Login = () => {
         const loginData = await dataResponse.json()
 
         if (loginData.success) {
-            toast.success(loginData.meesage)
+            toast.success(loginData.message)
             navigate('/')
-            // fetchUserDetails()
+            console.log("is fetchUserDetails defined?", fetchUserDetails)
+            fetchUserDetails()
             fetchUserAddToCart()
 
-            console.log("data login", loginData)
-
+            console.log("loginData:", loginData);
 
         }
         if (loginData.error) {

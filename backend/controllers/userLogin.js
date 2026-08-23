@@ -20,7 +20,7 @@ exports.userLogin = async (req, res) => {
         }
 
         const checkPassword = await bcrypt.compare(password, user.password)
-        console.log("checkPassword", checkPassword)
+
 
         if (checkPassword) {
             const tokenData = {
@@ -28,18 +28,22 @@ exports.userLogin = async (req, res) => {
                 email: user.email,
 
             }
+
+
             const token = jwt.sign(tokenData, process.env.SECRET_KEY,
                 { expiresIn: 60 * 60 }
             );
+
 
             const tokenOption = {
                 httpOnly: true,
                 secure: true
             }
-            res.cookie("token", token).json({
+            return res.cookie("token", token, tokenOption).json({
                 message: "login successfully",
                 token: token,
                 success: true,
+
 
 
             })

@@ -37,7 +37,7 @@ function App() {
     if (dataApi.success) {
       dispatch(setUserDetails(dataApi.data))
     }
-    console.log("data-user", dataResponse)
+    console.log("data-user", dataApi)
   }
 
   const fetchUserAddToCart = async () => {
@@ -56,6 +56,7 @@ function App() {
   useEffect(() => {
     // user Details
     fetchUserDetails();
+
 
     // cart product
     fetchUserAddToCart()

@@ -1,10 +1,12 @@
 
-const { default: summaryApi } = "../common/index"
+import summaryApi from "../common/index";
+// const { default: SummaryApi } = "../common/index"
+
 
 const fetchCategoryWiseProduct = async (category) => {
-    const response = await fetch(summaryApi.categoryWieProduct.Url, {
-        method: summaryApi.categoryWiseproduct.method,
-        headder: {
+    const response = await fetch(summaryApi.categoryWiseProduct.url, {
+        method: summaryApi.categoryWiseProduct.method,
+        header: {
             "content-type": "application/json"
         },
         body: JSON.stringify({

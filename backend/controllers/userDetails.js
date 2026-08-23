@@ -1,6 +1,8 @@
+const User = require("../models/user")
 
 exports.userDetails = async (req, res) => {
     try {
+
         console.log("userID", req.userId)
         const user = await User.findById(req.userId)
 
@@ -8,6 +10,7 @@ exports.userDetails = async (req, res) => {
             data: user,
             success: true,
             message: "user details"
+
         })
         console.log("user", user)
 
@@ -18,7 +21,8 @@ exports.userDetails = async (req, res) => {
     catch (error) {
         return res.status(500).json({
             success: false,
-            message: "something went wrong in userdetails"
+            message: "something went wrong in userdetails",
+            error: error.message
         })
 
 

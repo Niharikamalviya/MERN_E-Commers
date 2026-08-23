@@ -66,9 +66,9 @@ const VerticalCardProduct = ({ category, heading }) => {
                 {
                     loading ? (
 
-                        loadingList.map((product, index) => {
+                        loadingList?.map((product, index) => {
                             return (
-                                <div className="w-full min-w-[280px]  md:min-w-[320px] max-w-[280px] md:max-w-[320px]  bg-white  rounded-sm shadow-md">
+                                <div key={index} className="w-full min-w-[280px]  md:min-w-[320px] max-w-[280px] md:max-w-[320px]  bg-white  rounded-sm shadow-md">
                                     {/* image */}
                                     <div className="bg-slate-200 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center  bg-slate-200 animate-pulse"></div>
 
@@ -96,7 +96,7 @@ const VerticalCardProduct = ({ category, heading }) => {
 
                     ) : (
 
-                        data.map((product, index) => {
+                        data?.map((product, index) => {
                             return (
                                 <Link to={"product-Details/" + product?._id} className="w-full min-w-[280px]  md:min-w-[320px] max-w-[280px] md:max-w-[320px]  bg-white  rounded-sm shadow-md">
                                     <div className="bg-slate-200 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center">
