@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import summaryApi from '../common/index'
 
 const CategoryList = () => {
 
@@ -23,15 +24,16 @@ const CategoryList = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <div className="flex items-center gap-4 justify-between overflow-hidden scrollbar-none ">
+            <div className="flex items-center gap-4 justify-between overflow-scroll scrollbar-none ">
                 {
 
                     loading ? (
 
                         categoryLoading.map((el, index) => {
                             return (
-                                < div className="h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden bg-slate-200">
-                                    key={"categoryLoading" + index}
+                                < div className="h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden bg-slate-200 animate-pulse"
+                                    key={"categoryLoading" + index}>
+
                                 </div>
 
                             )

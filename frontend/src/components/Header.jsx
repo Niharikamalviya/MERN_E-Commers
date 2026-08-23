@@ -4,7 +4,7 @@ import { ImSearch } from "react-icons/im";
 import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from "react-hot-toast"
-import summaryApi from '../common'
+import summaryApi from '../common/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserDetails } from '../slices/userSlice'
 import { useState, useContext } from 'react'
@@ -57,7 +57,7 @@ const Header = () => {
 
 
     return (
-        <header className='h-16 shadow-md bg-white fixed z-40'>
+        <header className='h-16 shadow-md bg-white fixed w-full z-40'>
             <div className='h-full container mx-auto flex items-center px-4 justify-between'>
 
                 {/* Logo */}
