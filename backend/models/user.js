@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     },
     profile: {
         type: String,
+    },
+    role: {
+        type: String,
+        default: "GENERAL",
     }
 })
 

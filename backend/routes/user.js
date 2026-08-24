@@ -24,16 +24,16 @@ const { updateAddToCart } = require("../controllers/updateAddToCart")
 
 
 //auth
-router.post("/signup", userSignUp)
-router.post("/login", userLogin)
-router.get("/user-Details", authToken, userDetails)
-router.get("/userLogout", userLogout)
+router.post("/auth/signup", userSignUp)
+router.post("/auth/login", userLogin)
+router.get("/auth/user-Details", authToken, userDetails)
+router.get("/auth/userLogout", userLogout)
 
 
 //admin-panel
 
-router.get("/all-user", authToken, allUser)
-router.post("/update-user", authToken, updateUser)
+router.get("/auth/all-user", authToken, allUser)
+router.post("/auth/update-user", authToken, updateUser)
 
 //product upload
 router.post("/upload-product", authToken, uploadProduct)

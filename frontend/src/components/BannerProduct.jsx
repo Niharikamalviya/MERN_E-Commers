@@ -19,7 +19,7 @@ const BannerProduct = () => {
 
     const [imageTranslate, setImageTranslate] = useState(0)
 
-    const bannerImage = [
+    const bannerImages = [
         image1,
         image2,
         image3,
@@ -84,7 +84,7 @@ const BannerProduct = () => {
                 {/* desktop display */}
                 <div className="flex w-full h-full overflow-hidden">
                     {
-                        bannerImage.map((imageUrl, index) => {
+                        bannerImages.map((imageUrl, index) => {
                             return (
                                 <div className="w-full h-full  min-w-full min-h-full translate transition-all" key={imageUrl} style={{ transform: `translateX(-${imageTranslate * 100} %)` }}>
                                     <img src={imageUrl} className='w-full h-full' />

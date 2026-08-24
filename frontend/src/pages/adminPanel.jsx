@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaRegUserCircle } from "react-icons/fa";
-import { useState } from 'react'
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from 'react-redux'
+import ROLE from "../common/role"
 
 const AdminPanel = () => {
 
     const user = useSelector(state => state?.user?.user)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user?.role !== ROLE.ADMIN) {
-            naavigate("/")
+            // navigate("/")
         }
 
     }, [user])
@@ -37,14 +38,12 @@ const AdminPanel = () => {
                         <Link to={"all-users"}
                             className="px-2 py-1 hover:bg-slate-100">All Users</Link>
                         <Link to={"product"}
-                            className="px-2 py-1 hover:bg-slate-100"> product</Link>
+                            className="px-2 py-1 hover:bg-slate-100">All product</Link>
                     </nav>
                 </div>
             </div>
 
-            <main>
-                main
-            </main>
+
         </div>
     )
 

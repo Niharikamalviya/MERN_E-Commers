@@ -103,15 +103,11 @@ const Header = () => {
                         {/* admin-panel */}
                         {
                             menuDisplay && (
-                                <div className=" absolute bg-white bottom-0 top-11 h-fit p-1 rounded shadow-lg  ">
-
+                                <div className='absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded z-10' >
                                     <nav>
-
                                         {
                                             user?.role === ROLE.ADMIN && (
-                                                <Link to={"/admin-panel"}
-                                                    className="whitespace-nowrap text-lg hover:bg-slate-100 p-2">Admin panel</Link>
-
+                                                <Link to={"/admin-panel"} className='whitespace-nowrap hidden md:block hover:bg-slate-100 p-2' onClick={() => setMenuDisplay(preve => !preve)}>Admin Panel</Link>
                                             )
                                         }
 

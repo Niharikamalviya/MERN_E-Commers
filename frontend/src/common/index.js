@@ -1,20 +1,20 @@
 
-const BASE_URL = "http://localhost:4000/api/v1/auth"
+const BASE_URL = "http://localhost:4000/api/v1"
 const summaryApi = {
     signUp: {
-        url: `${BASE_URL}/signup`,
+        url: `${BASE_URL}/auth/signup`,
         method: "post"
     },
     login: {
-        url: `${BASE_URL}/login`,
+        url: `${BASE_URL}/auth/login`,
         method: "post"
     },
     current_user: {
-        url: `${BASE_URL}/user-Details`,
+        url: `${BASE_URL}/auth/user-Details`,
         method: "get"
     },
     logout_user: {
-        url: `${BASE_URL}/userLogout`,
+        url: `${BASE_URL}/auth/userLogout`,
         method: "get"
     },
     allUser: {

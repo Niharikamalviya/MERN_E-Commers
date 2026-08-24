@@ -4,8 +4,8 @@ const User = require("../models/user")
 exports.userDetails = async (req, res) => {
     try {
 
-        console.log("userID", req.userID)
-        const user = await User.findById(req.userID)
+        console.log("userId", req.userId)
+        const user = await User.findById(req.userId)
 
         res.status(200).json({
             data: user,

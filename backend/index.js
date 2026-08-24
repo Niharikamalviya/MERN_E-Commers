@@ -26,7 +26,7 @@ connectDB();
 //routes
 const userRoutes = require("./routes/user")
 
-app.use("/api/v1/auth", userRoutes)
+app.use("/api/v1", userRoutes)
 
 
 app.listen(PORT, () => {
