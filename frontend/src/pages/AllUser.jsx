@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import moment from "moment";
 import summaryApi from "../common/index"
 import toast from "react-hot-toast"
 // import moment from 'momment'
 import { MdEdit } from "react-icons/md";
-import changeUserRole from "../components/changeUserRole"
+import ChangeUserRole from "../components/changeUserRole"
 
 const AllUser = () => {
-    const [alluser, setAllUser] = useState([])
+    const [allUser, setAllUser] = useState([])
     const [openUpdateRole, setOpenUpdateRole] = useState(false)
     const [updateUser, setUpdateUser] = useState({
         email: " ",
@@ -19,7 +20,7 @@ const AllUser = () => {
     const fetchAllUser = async () => {
         const fetchData = await fetch(summaryApi.allUser.url, {
             method: summaryApi.allUser.method,
-            credentails: "include"
+            credentials: "include"
         })
         const dataResponse = await fetchData.json()
 
@@ -31,7 +32,7 @@ const AllUser = () => {
 
         }
 
-        cosole.log("dataResponse", dataResponse)
+        console.log("dataResponse", dataResponse)
     }
     useEffect(() => {
         fetchAllUser()
@@ -39,31 +40,33 @@ const AllUser = () => {
 
 
     return (
-        <div className="pb-4">
-            <table classname="w-full border text-base font-medium bg-white">
-                <thead className="bg-black text=white">
-                    <th>sr.</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Created Date</th>
-                    <th>Action</th>
+        <div className="pb-4 ">
+            <table className="w-full text-base font-medium bg-white">
+                <thead className="bg-black text-white w-full">
+                    <tr >
+                        <th>sr.</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Created Date</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {
                         allUser.map((ele, index) => {
                             return (
-                                <tr>
-                                    <td>{index + 1}</td>
-                                    <td>{ele?.name}</td>
-                                    <td>{ele?.email}</td>
-                                    <td>{ele?.role}</td>
-                                    <td>{moment(ele?.createdAt).format('LL')}</td>
-                                    <td>
+                                <tr className="border-b">
+                                    <td className="border px-4 py-2">{index + 1}</td>
+                                    <td className="border px-4 py-2">{ele?.name}</td>
+                                    <td className="border px-4 py-2">{ele?.email}</td>
+                                    <td className="border px-4 py-2">{ele?.role}</td>
+                                    <td className="border px-4 py-2">{moment(ele?.createdAt).format('LL')}</td>
+                                    <td className="border px-4 py-2">
                                         <button className="bg-green-100 hover:bg-green-200 rounded-full cursor-pointer hover:text-white"
                                             onClick={() => {
-                                                setupdateUser(ele)
-                                                setOpenUserRole(true)
+                                                setUpdateUser(ele)
+                                                setOpenUpdateRole(true)
                                             }}>
                                             <MdEdit />
                                         </button>
@@ -79,7 +82,7 @@ const AllUser = () => {
 
             {
                 openUpdateRole && (
-                    <changeUserRole
+                    <ChangeUserRole
                         onClose={() => setOpenUpdateRole(false)}
                         name={updateUser.name}
                         email={updateUser.email}

@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import UploadProduct from '../components/uploadProducts'
+import summaryApi from "../common/index"
 
 const AllProduct = () => {
     const [openUploadProduct, setOpenUploadProduct] = useState(false)
     const [allProduct, setAllProduct] = useState([])
 
     const fetchAllProduct = async () => {
-        const response = await fetch(summaryApi.allProduct.url, {
+        const dataResponse = await fetch(summaryApi.allProduct.url, {
             method: summaryApi.allProduct.method,
         })
 

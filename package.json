@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Niharikamalviya/MERN_E-Commers#readme",
   "devDependencies": {
     "concurrently": "^10.0.4"
+  },
+  "dependencies": {
+    "moment": "^2.30.1"
   }
 }

@@ -18,7 +18,7 @@ const summaryApi = {
         method: "get"
     },
     allUser: {
-        url: `${BASE_URL}/all-user`,
+        url: `${BASE_URL}/auth/all-user`,
         method: "get"
     },
     updateUser: {

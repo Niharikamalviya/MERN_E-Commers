@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoMdClose } from "react-icons/io";
 import ProductCategory from '../helpers/productCategory'
 import { FaCloudUploadAlt } from "react-icons/fa";
 import uploadImage from '../helpers/uploadImage'
 import { MdDelete } from "react-icons/md";
+import DisplayImage from "../components/DisplayImage"
 
 
 const uploadProduct = (
-    onClose,
-    fetchData
+    {
+        onClose,
+        fetchData
+    }
 ) => {
 
     const handleOnChange = (e) => {
@@ -26,7 +29,7 @@ const uploadProduct = (
     const handleUploadProduct = async (e) => {
         const file = e.target.files[0]
         setUploadProductImageInput(file.name)
-        console.lpg("file", file)
+        console.log("file", file)
 
         const uploadImageCloudinary = await uploadImage(file)
 
@@ -50,7 +53,7 @@ const uploadProduct = (
     })
 
     const [openFullImage, setOpenFullImage] = useState(false)
-    const [fullScreenImage, setFullScreenImage] = useSate("")
+    const [fullScreenImage, setFullScreenImage] = useState("")
     const [uploadProductImageInput, setUploadProductImageInput] = useState("")
 
     const handleDeleteImage = async (index) => {
@@ -117,7 +120,7 @@ const uploadProduct = (
                     onSubmit={handleUploadProoduct}>
 
                     {/* product name */}
-                    <label htmlfor='productName'>Product Name :</label>
+                    <label htmlFor='productName'>Product Name :</label>
                     <input type='text'
                         id="productName"
                         placeholder="Enter product name "
@@ -128,7 +131,7 @@ const uploadProduct = (
                         className="p-2 bg-slate-100 border rounded" />
 
                     {/* brand name */}
-                    <label htmlfor='brandName'>Brand Name :</label>
+                    <label htmlFor='brandName'>Brand Name :</label>
                     <input type='text'
                         id="brandName"
                         placeholder="Enter brand name "
@@ -141,26 +144,28 @@ const uploadProduct = (
 
                     {/* category */}
 
-                    <label htmlfor='category'>Category :</label>
+                    <label htmlFor='category'>Category :</label>
                     <select value={data.category}
+                        name="category"
+                        onChange={handleOnChange}
+                        required
                         className="p-2 bg-slate-100 border rounded">
+                        <option value="" disabled>select category</option>
                         {
                             ProductCategory.map((el, index) => {
                                 return (
-                                    <option value="" key={index} className="text-slate-700"
-                                        required
-                                        onChnage={handleOnChange}>select category</option>
+                                    <option value={el.value} key={index} className="text-slate-700">
+                                        {el.label}
+                                    </option>
                                 )
                             })
-
                         }
-
                     </select>
 
                     {/* product iamge */}
 
-                    <label htmlfor='productImage'>Product Image :</label>
-                    <label htmlfor='uploadImage'>
+                    <label htmlFor='productImage'>Product Image :</label>
+                    <label htmlFor='uploadImage'>
                         <div className="p-2 bg-slate-100 border rounded h-32 w-full flex justify-center items-center cursor-pointer">
 
                             <div className="text-slate-500 flex flex-col justify-center items-center gap-2">
@@ -182,15 +187,16 @@ const uploadProduct = (
                             data?.productImage[0] ? (
                                 <div className="flex items-center gap-2">
                                     {
-                                        data.productImage.map((ele, index) => {
+                                        data?.productImage.map((ele, index) => {
                                             return (
-                                                <div className="relative group">
-                                                    <img src={el} width={80} height={80}
+                                                <div className="relative group"
+                                                    key={ele}>
+                                                    <img src={ele} width={80} height={80}
                                                         className="bg-slate-100 border cursor-pointer"
                                                         required
                                                         onClick={() => {
-                                                            setopenFullImage(true)
-                                                            setFullScreenImage(el)
+                                                            setOpenFullImage(true)
+                                                            setFullScreenImage(ele)
 
                                                         }} />
 
@@ -217,7 +223,7 @@ const uploadProduct = (
 
                     {/* price   */}
 
-                    <label htmlfor='price'>Price</label>
+                    <label htmlFor='price'>Price</label>
                     <input type='number'
                         id="price"
                         placeholder="Enter price"
@@ -229,7 +235,7 @@ const uploadProduct = (
 
                     {/* selling price   */}
 
-                    <label htmlfor='sellingPrice'>selling Price</label>
+                    <label htmlFor='sellingPrice'>selling Price</label>
                     <input type='number'
                         id="sellingPrice"
                         placeholder="Enter sellingPrice"
@@ -242,12 +248,12 @@ const uploadProduct = (
 
                     {/* description */}
 
-                    <label htmlfor='Description'>Description</label>
+                    <label htmlFor='Description'>Description</label>
                     <textarea className="h-28 bg-slate-100 border resize-none p-1 "
                         rows={3}
                         placeholder="enter prooduct description"
                         onChange={handleOnChange}
-                        value={data.Description}
+                        value={data.description}
                         name="Description">
 
                     </textarea>
@@ -263,7 +269,7 @@ const uploadProduct = (
             {/* display image full screen */}
             {
                 openFullImage && (
-                    <DisplayImage onClose={() => setopenFullImage(false)} imageUrl={fullScreenImage} />
+                    <DisplayImage onClose={() => setOpenFullImage(false)} imageUrl={fullScreenImage} />
                 )
 
             }

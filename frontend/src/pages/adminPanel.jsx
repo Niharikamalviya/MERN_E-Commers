@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { FaRegUserCircle } from "react-icons/fa";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Outlet } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import ROLE from "../common/role"
 
@@ -37,11 +37,15 @@ const AdminPanel = () => {
                     <nav className="grid p-4">
                         <Link to={"all-users"}
                             className="px-2 py-1 hover:bg-slate-100">All Users</Link>
-                        <Link to={"product"}
+                        <Link to={"all-products"}
                             className="px-2 py-1 hover:bg-slate-100">All product</Link>
                     </nav>
                 </div>
             </div>
+
+            <main className="w-full h-full p-4">
+                <Outlet />
+            </main>
 
 
         </div>

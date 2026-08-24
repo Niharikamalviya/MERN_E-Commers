@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import './App.css'
+import "./App.css";
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Header from './components/Header'
@@ -75,11 +75,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/admin-panel" element={<AdminPanel />} />
             <Route path="/forget-password" element={<ForgetPassword />} />
             <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/all-products" element={<AllProduct />} />
-            <Route path="/all-user" element={<Alluser />} />
+            <Route path="/admin-panel" element={<AdminPanel />}>
+              <Route path="all-products" element={<AllProduct />} />
+              <Route path="all-users" element={<Alluser />} />
+            </Route>
             <Route path="/product-Details/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/search" element={<searchBar />} />

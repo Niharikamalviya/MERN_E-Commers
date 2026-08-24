@@ -83,8 +83,9 @@ const Header = () => {
 
                 {/* user icon and card */}
                 <div className="flex itemx-center gap-7">
+
                     {/* user Icon */}
-                    <div className="relative flex justify-center">
+                    <div className="relative group flex justify-center">
 
                         {
                             user?._id && (
@@ -97,16 +98,20 @@ const Header = () => {
                                         ) : (<FaRegUserCircle />)
                                     }
                                 </div>
+
+
                             )
                         }
+
+
 
                         {/* admin-panel */}
                         {
                             menuDisplay && (
-                                <div className='absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded z-10' >
+                                <div className='absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded' >
                                     <nav>
                                         {
-                                            user?.role === ROLE.ADMIN && (
+                                            user?.role === ROLE.GENERAL && (
                                                 <Link to={"/admin-panel"} className='whitespace-nowrap hidden md:block hover:bg-slate-100 p-2' onClick={() => setMenuDisplay(preve => !preve)}>Admin Panel</Link>
                                             )
                                         }
