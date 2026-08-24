@@ -19,6 +19,7 @@ import AllProduct from "./pages/AllProduct"
 import ProductDetails from "./pages/ProductDetails"
 import Cart from "./pages/cart"
 import searchBar from "./pages/searchBar"
+import { setUserDetails } from "./slices/userSlice";
 
 
 function App() {
@@ -54,13 +55,9 @@ function App() {
 
   }
   useEffect(() => {
-    // user Details
-    fetchUserDetails();
-
-
-    // cart product
+    fetchUserDetails()
     fetchUserAddToCart()
-  })
+  }, [])
 
 
 

@@ -2,12 +2,15 @@ const jwt = require("jsonwebtoken")
 
 exports.authToken = async (req, res, next) => {
     try {
-        const token = req.cookies?.token || req.header
+        const token = req.cookies?.token;
+        //|| req.body?.token || req.header("Authorization")?.replace("Bearer ", "");
+
 
         if (!token) {
             return res.json({
                 message: "User not login",
                 success: false,
+
             })
         }
 
@@ -20,7 +23,7 @@ exports.authToken = async (req, res, next) => {
                 console.log("error auth", err)
             }
 
-            req.userID = decode;
+            req.userID = decode.id;
             next()
 
         })

@@ -15,9 +15,11 @@ import Context from '../context'
 const Header = () => {
 
     // display user details on header
-    const user = useSelector(state => state?.user)
+    const user = useSelector(state => state?.user?.user)
     const dispatch = useDispatch()
+
     console.log("user-header", user)
+
     const [menuDisplay, setMenuDisplay] = useState(false)
     const context = useContext(Context)
     const navigate = useNavigate()
@@ -34,6 +36,7 @@ const Header = () => {
         if (data.success) {
             toast.success(data.message)
             dispatch(setUserDetails(null))
+            navigate("/")
         }
 
         if (data.error) {
