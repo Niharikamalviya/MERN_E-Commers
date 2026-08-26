@@ -18,7 +18,7 @@ const Header = () => {
     const user = useSelector(state => state?.user?.user)
     const dispatch = useDispatch()
 
-    console.log("user-header", user)
+
 
     const [menuDisplay, setMenuDisplay] = useState(false)
     const context = useContext(Context)

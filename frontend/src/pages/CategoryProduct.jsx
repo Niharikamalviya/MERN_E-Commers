@@ -8,7 +8,7 @@ const categoryProduct = () => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [selectCategory, setSelectCategory] = useState({})
-    const [filterCategoryList, setFilterCategoryList]
+    const [filterCategoryList, setFilterCategoryList] = useState()
 
     const fetchData = async () => {
         const response = await fetch(summaryApi.filterProduct.url, {

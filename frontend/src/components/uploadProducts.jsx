@@ -5,14 +5,11 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import uploadImage from '../helpers/uploadImage'
 import { MdDelete } from "react-icons/md";
 import DisplayImage from "../components/DisplayImage"
+import summaryApi from '../common/index'
+import { toast } from "react-hot-toast"
 
 
-const uploadProduct = (
-    {
-        onClose,
-        fetchData
-    }
-) => {
+const uploadProduct = ({ onClose, fetchdata }) => {
 
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -59,7 +56,7 @@ const uploadProduct = (
     const handleDeleteImage = async (index) => {
         console.log("image index", index)
 
-        const newProductImage = { ...data.productImage }
+        const newProductImage = [...data.productImage]
         newProductImage.splice(index, 1)
 
         setData((preve) => {
@@ -73,7 +70,7 @@ const uploadProduct = (
 
     //  submit product upload data
 
-    const handleUploadProoduct = async (e) => {
+    const handleSubmitProduct = async (e) => {
         e.preventDefault()
         console.log("data", data)
         const dataResponse = await fetch(summaryApi.uploadProduct.url, {
@@ -90,7 +87,7 @@ const uploadProduct = (
         if (productResponse.success) {
             toast.success(productResponse?.message)
             onClose()
-            fetchData()
+            fetchdata()
         }
 
 
@@ -117,7 +114,7 @@ const uploadProduct = (
 
                 {/* form product data */}
                 <form className="grid p-4 gap-1 overflow-y-scroll h-full pb-5"
-                    onSubmit={handleUploadProoduct}>
+                    onSubmit={handleSubmitProduct}>
 
                     {/* product name */}
                     <label htmlFor='productName'>Product Name :</label>
@@ -201,7 +198,7 @@ const uploadProduct = (
                                                         }} />
 
                                                     <div className="absolute bottom-0 right-0 p-1 text-white bg-red-600 rounded-full hidden group-hover:block cursor-pointer"
-                                                        onClick={() => handleDeleteImage(index)}>
+                                                        onClick={() => { handleDeleteImage(index) }}>
                                                         <MdDelete />
                                                     </div>
 
@@ -248,13 +245,13 @@ const uploadProduct = (
 
                     {/* description */}
 
-                    <label htmlFor='Description'>Description</label>
+                    <label htmlFor='description'>Description</label>
                     <textarea className="h-28 bg-slate-100 border resize-none p-1 "
                         rows={3}
                         placeholder="enter prooduct description"
                         onChange={handleOnChange}
                         value={data.description}
-                        name="Description">
+                        name="description">
 
                     </textarea>
 

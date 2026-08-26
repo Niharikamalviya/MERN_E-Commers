@@ -3,7 +3,7 @@ import { MdEdit } from "react-icons/md";
 
 const AdminProductCard = ({ data, fetchdata }) => {
 
-    const [editProduct, setEditProduct]
+    const [editProduct, setEditProduct] = useState()
 
     return (
         < div className="bg-white rounded p-4">

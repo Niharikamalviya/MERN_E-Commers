@@ -1,4 +1,5 @@
 const Product = require("../models/productModel")
+const { uploadProductPermission } = require("../helper/permission")
 
 exports.uploadProduct = async (req, res) => {
     try {
@@ -22,7 +23,8 @@ exports.uploadProduct = async (req, res) => {
     catch (error) {
         return res.status(500).json({
             success: false,
-            message: "something went wrong in upload product"
+            message: "something went wrong in upload product",
+            error: error.message
         })
 
 

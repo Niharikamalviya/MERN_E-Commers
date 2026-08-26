@@ -34,7 +34,7 @@ const AdminEditProductCard = (
 
     }
 
-    const handleUploadProduct = (e) => {
+    const handleUploadProduct = async (e) => {
         const file = e.target.files[0]
         setUploadProductImageInput(file.name)
         console.lpg("file", file)
@@ -85,17 +85,17 @@ const AdminEditProductCard = (
             body: JSON.stringify(data)
         })
 
-        const productResponse = await productResponse.json()
+        const dataResponse = await productResponse.json()
 
-        if (productResponse.success) {
-            toast.success(productResponse?.message)
+        if (dataResponse.success) {
+            toast.success(dataResponse?.message)
             onClose()
             fetchdata()
         }
 
 
-        if (productResponse.error) {
-            toast.error(productResponse?.message)
+        if (dataResponse.error) {
+            toast.error(dataResponse?.message)
         }
     }
 

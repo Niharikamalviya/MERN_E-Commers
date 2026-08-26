@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ROLE from "../common/role"
 import { IoMdClose } from "react-icons/io";
+import summaryApi from "../common/index"
+import toast from "react-hot-toast"
 
 const changeUserRole = ({
     name,
@@ -21,7 +23,7 @@ const changeUserRole = ({
     const updateUserRole = async () => {
 
         const fetchData = await fetch(summaryApi.updateUser.url, {
-            method: summartApi.updateUser.method,
+            method: summaryApi.updateUser.method,
             credentials: "include",
             headers: {
                 "content-type": "application/json"
@@ -64,9 +66,9 @@ const changeUserRole = ({
                         value={userRole}
                         onChange={handleSelect}>
                         {
-                            object.value(ROLE).map(ele => {
+                            Object.values(ROLE).map(ele => {
                                 return (
-                                    <option value={ele} key={ele}></option>
+                                    <option value={ele} key={ele}>{ele}</option>
                                 )
                             })
                         }
@@ -75,7 +77,9 @@ const changeUserRole = ({
 
                 </div>
 
-                <button className="w-fit mx-auto block border py-1 px-3 rounded-full text-white bg-red-600 hover:bg-red-700">Change Role</button>
+                <button
+                    onClick={updateUserRole}
+                    className="w-fit mx-auto block border py-1 px-3 rounded-full text-white bg-red-600 hover:bg-red-700">Change Role</button>
 
             </div>
         </div>

@@ -56,7 +56,7 @@ const AllUser = () => {
                     {
                         allUser.map((ele, index) => {
                             return (
-                                <tr className="border-b">
+                                <tr className="border-b" key={ele._id}>
                                     <td className="border px-4 py-2">{index + 1}</td>
                                     <td className="border px-4 py-2">{ele?.name}</td>
                                     <td className="border px-4 py-2">{ele?.email}</td>
@@ -65,8 +65,9 @@ const AllUser = () => {
                                     <td className="border px-4 py-2">
                                         <button className="bg-green-100 hover:bg-green-200 rounded-full cursor-pointer hover:text-white"
                                             onClick={() => {
-                                                setUpdateUser(ele)
-                                                setOpenUpdateRole(true)
+                                                console.log("edit clicked", ele)
+                                                setUpdateUser(ele);
+                                                setOpenUpdateRole(true);
                                             }}>
                                             <MdEdit />
                                         </button>
