@@ -34,7 +34,7 @@ const summaryApi = {
         method: "get"
     },
     updateProduct: {
-        url: `${BASE_URL} /update-product`,
+        url: `${BASE_URL}/update-product/:id`,
         method: "post"
     },
     categoryProduct: {

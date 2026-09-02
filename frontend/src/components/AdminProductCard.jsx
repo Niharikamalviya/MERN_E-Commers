@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdEdit } from "react-icons/md";
+import displayINRCurrency from '../helpers/currency'
+import AdminEditProduct from "../components/AdminEditProductCard"
 
 const AdminProductCard = ({ data, fetchdata }) => {
 
@@ -24,7 +26,7 @@ const AdminProductCard = ({ data, fetchdata }) => {
 
             </div>
 
-            <div className="w-fit ml-auto hover:bg-green-500 hover:text-white bg-gree-100 cursor-pointer"
+            <div className="w-fit ml-auto hover:bg-green-500 hover:text-white bg-gree-100 cursor-pointer rounded-full"
                 onClick={() => setEditProduct(true)}>
                 <MdEdit />
             </div>

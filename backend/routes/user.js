@@ -38,7 +38,7 @@ router.post("/auth/update-user", authToken, updateUser)
 //product upload
 router.post("/upload-product", authToken, uploadProduct)
 router.get("/get-products", getProduct)
-router.post("/update-product", updateProduct, authToken)
+router.post("/update-product/:id", updateProduct, authToken)
 router.post("/get-categoryProduct", getCategoryProduct)
 router.post("/get-categoryWise-product", getCategoryWiseProduct)
 router.post("/product-details", getProductDetails)

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import UploadProduct from '../components/uploadProducts'
 import summaryApi from "../common/index"
+import AdminProductCard from "../components/AdminProductCard"
 
 const AllProduct = () => {
     const [openUploadProduct, setOpenUploadProduct] = useState(false)
     const [allProduct, setAllProduct] = useState([])
 
     const fetchAllProduct = async () => {
-        const dataResponse = await fetch(summaryApi.allProduct.url, {
+        const response = await fetch(summaryApi.allProduct.url, {
             method: summaryApi.allProduct.method,
         })
+        const dataResponse = await response.json()
 
         setAllProduct(dataResponse?.data || [])
     }

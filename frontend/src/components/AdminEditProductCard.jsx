@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoMdClose } from "react-icons/io";
 import ProductCategory from '../helpers/productCategory'
 import { FaCloudUploadAlt } from "react-icons/fa";
 import uploadImage from '../helpers/uploadImage'
 import { MdDelete } from "react-icons/md";
+import DisplayImage from "../components/DisplayImage"
+import summaryApi from '../common/index'
+import { toast } from "react-hot-toast"
 
 
 
@@ -19,7 +22,7 @@ const AdminEditProductCard = (
         productImage: productData?.productImage || [],
         description: productData?.description,
         price: productData?.price,
-        selling: productData?.selling
+        sellingPrice: productData?.sellingPrice
     })
 
     const handleOnChange = (e) => {
@@ -37,7 +40,7 @@ const AdminEditProductCard = (
     const handleUploadProduct = async (e) => {
         const file = e.target.files[0]
         setUploadProductImageInput(file.name)
-        console.lpg("file", file)
+        console.log("file", file)
 
         const uploadImageCloudinary = await uploadImage(file)
 
@@ -53,13 +56,13 @@ const AdminEditProductCard = (
 
 
     const [openFullImage, setOpenFullImage] = useState(false)
-    const [fullScreenImage, setFullScreenImage] = useSate("")
+    const [fullScreenImage, setFullScreenImage] = useState("")
     const [uploadProductImageInput, setUploadProductImageInput] = useState("")
 
     const handleDeleteImage = async (index) => {
         console.log("image index", index)
 
-        const newProductImage = { ...data.productImage }
+        const newProductImage = [...data.productImage]
         newProductImage.splice(index, 1)
 
         setData((preve) => {
@@ -75,15 +78,19 @@ const AdminEditProductCard = (
 
     const handleUploadProoduct = async (e) => {
         e.preventDefault()
+
         console.log("data", data)
-        const productResponse = await fetch(summaryApi.updateProduct.url, {
-            method: summaryApi.updateProduct.method,
-            credentials: "include",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
+        console.log("updateProduct config:", summaryApi.updateProduct)
+        console.log("Submitting with _id:", data._id)
+        const productResponse = await fetch(summaryApi.updateProduct.url(data._id),
+            {
+                method: summaryApi.updateProduct.method,
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
 
         const dataResponse = await productResponse.json()
 
@@ -91,10 +98,7 @@ const AdminEditProductCard = (
             toast.success(dataResponse?.message)
             onClose()
             fetchdata()
-        }
-
-
-        if (dataResponse.error) {
+        } else {
             toast.error(dataResponse?.message)
         }
     }
@@ -123,7 +127,7 @@ const AdminEditProductCard = (
                     onSubmit={handleUploadProoduct}>
 
                     {/* product name */}
-                    <label htmlfor='productName'>Product Name :</label>
+                    <label htmlFor='productName'>Product Name :</label>
                     <input type='text'
                         id="productName"
                         placeholder="Enter product name "
@@ -134,7 +138,7 @@ const AdminEditProductCard = (
                         className="p-2 bg-slate-100 border rounded" />
 
                     {/* brand name */}
-                    <label htmlfor='brandName'>Brand Name :</label>
+                    <label htmlFor='brandName'>Brand Name :</label>
                     <input type='text'
                         id="brandName"
                         placeholder="Enter brand name "
@@ -147,26 +151,29 @@ const AdminEditProductCard = (
 
                     {/* category */}
 
-                    <label htmlfor='category'>Category :</label>
-                    <select value={data.category}
-                        className="p-2 bg-slate-100 border rounded">
+                    <label htmlFor='category'>Category :</label>
+                    <select
+                        value={data.category}
+                        name="category"
+                        onChange={handleOnChange}
+                        className="p-2 bg-slate-100 border rounded"
+                    >
+                        <option value="">Select Category</option>
                         {
                             ProductCategory.map((el, index) => {
                                 return (
-                                    <option value="" key={index} className="text-slate-700"
-                                        required
-                                        onChnage={handleOnChange}>select category</option>
+                                    <option value={el.value} key={el.value + index} className="text-slate-700">
+                                        {el.label}
+                                    </option>
                                 )
                             })
-
                         }
-
                     </select>
 
                     {/* product iamge */}
 
-                    <label htmlfor='productImage'>Product Image :</label>
-                    <label htmlfor='uploadImage'>
+                    <label htmlFor='productImage'>Product Image :</label>
+                    <label htmlFor='uploadImage'>
                         <div className="p-2 bg-slate-100 border rounded h-32 w-full flex justify-center items-center cursor-pointer">
 
                             <div className="text-slate-500 flex flex-col justify-center items-center gap-2">
@@ -190,13 +197,14 @@ const AdminEditProductCard = (
                                     {
                                         data.productImage.map((ele, index) => {
                                             return (
-                                                <div className="relative group">
-                                                    <img src={el} width={80} height={80}
+                                                <div className="relative group"
+                                                    key={index}>
+                                                    <img src={ele} width={80} height={80}
                                                         className="bg-slate-100 border cursor-pointer"
                                                         required
                                                         onClick={() => {
-                                                            setopenFullImage(true)
-                                                            setFullScreenImage(el)
+                                                            setOpenFullImage(true)
+                                                            setFullScreenImage(ele)
 
                                                         }} />
 
@@ -223,7 +231,7 @@ const AdminEditProductCard = (
 
                     {/* price   */}
 
-                    <label htmlfor='price'>Price</label>
+                    <label htmlFor='price'>Price</label>
                     <input type='number'
                         id="price"
                         placeholder="Enter price"
@@ -235,27 +243,30 @@ const AdminEditProductCard = (
 
                     {/* selling price   */}
 
-                    <label htmlfor='sellingPrice'>Price</label>
-                    <input type='number'
+                    <label htmlFor='sellingPrice'>Price</label>
+                    <input
                         id="sellingPrice"
-                        placeholder="Enter sellingPrice"
                         value={data.sellingPrice}
                         name="sellingPrice"
                         onChange={handleOnChange}
+
                         className="p-2 bg-slate-100 border rounded"
                     />
 
 
                     {/* description */}
 
-                    <label htmlfor='Description'>Description</label>
-                    <textarea className="h-28 bg-slate-100 border resize-none p-1 "
-                        rows={3}
-                        placeholder="enter prooduct description"
-                        onChange={handleOnChange}
-                        value={data.Description}
-                        name="Description">
 
+                    <label htmlFor='description'>Description</label>
+                    <textarea
+                        className="h-28 bg-slate-100 border resize-none p-1"
+                        rows={3}
+                        placeholder="enter product description"
+                        onChange={handleOnChange}
+                        value={data.description}
+                        name="description"
+                        id="description"
+                    >
                     </textarea>
 
                     {/* update button */}
@@ -270,7 +281,7 @@ const AdminEditProductCard = (
             {/* display image full screen */}
             {
                 openFullImage && (
-                    <DisplayImage onClose={() => setopenFullImage(false)} imageUrl={fullScreenImage} />
+                    <DisplayImage onClose={() => setOpenFullImage(false)} imageUrl={fullScreenImage} />
                 )
 
             }
