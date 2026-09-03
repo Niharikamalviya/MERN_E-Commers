@@ -6,8 +6,8 @@ import summaryApi from "../common/index";
 const fetchCategoryWiseProduct = async (category) => {
     const response = await fetch(summaryApi.categoryWiseProduct.url, {
         method: summaryApi.categoryWiseProduct.method,
-        header: {
-            "content-type": "application/json"
+        headers: {
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
             category: category

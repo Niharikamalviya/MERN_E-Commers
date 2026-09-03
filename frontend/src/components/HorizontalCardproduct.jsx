@@ -51,14 +51,14 @@ const HorizontalCardProduct = ({ category, heading }) => {
             </h2>
 
             {/* product image */}
-            <div className="flex items-center gap-4 md:gap-6 overflow-scroll scrollbar-none traansition-all "
+            <div className="flex items-center gap-4 md:gap-6 overflow-scroll scrollbar-none traansition-all object-fill mix-blend-multiply "
                 ref={scrollElement}>
 
                 {/* button scroll */}
                 <div className="flex justify-between w-full text-3xl text-slate-200">
                     <button className="absolute left-0 bg-white shadow-md rounded-full p-1 hidden md:block"
                         onClick={scrollLeft}><IoIosArrowBack /></button>
-                    <button className="absolute-rigth-0 bg-white shadow-md rounded-full p-1 hidden md:block"
+                    <button className="absolute right-0 bg-white shadow-md rounded-full p-1 hidden md:block"
                         onClick={scrollRight}><IoIosArrowForward /></button>
                 </div>
 
@@ -98,7 +98,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
                             return (
                                 <Link to={"product-Details/" + product?._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
                                     <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]">
-                                        <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all" />
+                                        <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all object-fill mix-blend-multiply" />
                                     </div>
                                     <div className="p-4 grid ">
                                         <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1 ">

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import summaryApi from '../common/index'
+import { Link } from 'react-router-dom'
 
 const CategoryList = () => {
 
@@ -44,7 +45,7 @@ const CategoryList = () => {
                     ) : (
                         categoryProduct.map((product, index) => {
                             return (
-                                <Link to={"/product-category" + product?.category} className="cursor-pointer" >
+                                <Link to={"/product-category" + product?.category} key={index} className="cursor-pointer" >
                                     <div className="cursor-pointer">
                                         <div className="md:w-20 md:h-20 w-16 h-16 rounded-full overflow-hidden p-2 bg-slate-200 flex justify-center items-center">
                                             <img src={product?.productImage[0]} alt={product?.category} className="h-full object-fill mix-blend-multiply hover:scale-125 transition-all duration-200" />

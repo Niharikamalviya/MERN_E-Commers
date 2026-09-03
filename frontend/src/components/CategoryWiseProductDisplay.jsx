@@ -51,11 +51,16 @@ const categoryWiseProductDisplay = ({ category, heading }) => {
                 ref={scrollElement}>
 
                 {/* button scroll */}
-                <div className="flex justify-between w-full text-3xl text-slate-200">
+                <div className="flex justify-between w-full text-3xl text-slate-200 relative">
+
                     <button className="absolute left-0 bg-white shadow-md rounded-full p-1 hidden md:block"
                         onClick={scrollLeft}><IoIosArrowBack /></button>
-                    <button className="absolute-rigth-0 bg-white shadow-md rounded-full p-1 hidden md:block"
+
+
+
+                    <button className="absolute right-0 bg-white shadow-md rounded-full p-1 hidden md:block"
                         onClick={scrollRight}><IoIosArrowForward /></button>
+
                 </div>
                 <div className="grid grid-cols md:gap-6 justify-center overflow-hidden">
                     {

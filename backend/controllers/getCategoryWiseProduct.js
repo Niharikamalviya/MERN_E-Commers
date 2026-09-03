@@ -1,4 +1,4 @@
-
+const Product = require("../models/productModel")
 
 exports.getCategoryWiseProduct = async (req, res) => {
     try {
@@ -16,7 +16,8 @@ exports.getCategoryWiseProduct = async (req, res) => {
     catch (error) {
         return res.status(500).json({
             success: false,
-            message: "something went wrong in showing product"
+            message: "something went wrong in showing product",
+            error: error.message
         })
 
 

@@ -4,6 +4,8 @@ import fetchCategoryWiseProduct from '../helpers/fetchCategoryWiseProduct'
 import { IoIosArrowBack } from "react-icons/io";
 import Context from "../context/index";
 import { IoIosArrowForward } from "react-icons/io";
+import { Link } from 'react-router-dom'
+import displayINRCurrency from '../helpers/currency'
 
 
 const VerticalCardProduct = ({ category, heading }) => {
@@ -20,7 +22,7 @@ const VerticalCardProduct = ({ category, heading }) => {
         const categoryProduct = await fetchCategoryWiseProduct(category)
         setLoading(false)
 
-        console.log("horizontal data", categoryProduct.data)
+        console.log("vertical data", categoryProduct.data)
         setData(categoryProduct?.data)
     }
     const { fetchUserAddToCart } = useContext(Context)
@@ -55,10 +57,10 @@ const VerticalCardProduct = ({ category, heading }) => {
                 ref={scrollElement}>
 
                 {/* button scroll */}
-                <div className="flex justify-between w-full text-3xl text-slate-200">
+                <div className=" flex justify-between w-full text-3xl text-slate-200">
                     <button className="absolute left-0 bg-white shadow-md rounded-full p-1 hidden md:block"
                         onClick={scrollLeft}><IoIosArrowBack /></button>
-                    <button className="absolute-rigth-0 bg-white shadow-md rounded-full p-1 hidden md:block"
+                    <button className="absolute right-0 bg-white shadow-md rounded-full p-1 hidden md:block"
                         onClick={scrollRight}><IoIosArrowForward /></button>
                 </div>
 
@@ -98,9 +100,9 @@ const VerticalCardProduct = ({ category, heading }) => {
 
                         data?.map((product, index) => {
                             return (
-                                <Link to={"product-Details/" + product?._id} className="w-full min-w-[280px]  md:min-w-[320px] max-w-[280px] md:max-w-[320px]  bg-white  rounded-sm shadow-md">
+                                <Link to={"product-Details/" + product?._id} key={index} className="w-full min-w-[280px]  md:min-w-[320px] max-w-[280px] md:max-w-[320px]  bg-white  rounded-sm shadow-md">
                                     <div className="bg-slate-200 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center">
-                                        <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all mix-blend-multipy" />
+                                        <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all object-fill mix-blend-multiply " />
                                     </div>
                                     <div className="p-4 grid gap-3">
                                         <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1 ">

@@ -38,7 +38,7 @@ const summaryApi = {
         method: "post"
     },
     categoryProduct: {
-        url: `${BASE_URL}/get-categoryProduct`,
+        url: `${BASE_URL}/get-category-product`,
         method: "get"
     },
     categoryWiseProduct: {

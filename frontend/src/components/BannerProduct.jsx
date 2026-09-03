@@ -36,7 +36,7 @@ const BannerProduct = () => {
     ]
 
     const nextImage = () => {
-        if (bannerImages.lenth - 1 > imageTranslate)
+        if (bannerImages.length - 1 > imageTranslate)
             setImageTranslate(preve => preve + 1)
     }
 
@@ -47,7 +47,7 @@ const BannerProduct = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            if (bannerImages.lenth - 1 > imageTranslate) {
+            if (bannerImages.length - 1 > imageTranslate) {
                 nextImage()
             }
             else {
@@ -86,7 +86,7 @@ const BannerProduct = () => {
                     {
                         bannerImages.map((imageUrl, index) => {
                             return (
-                                <div className="w-full h-full  min-w-full min-h-full translate transition-all" key={imageUrl} style={{ transform: `translateX(-${imageTranslate * 100} %)` }}>
+                                <div className="w-full h-full  min-w-full min-h-full translate transition-all" key={imageUrl} style={{ transform: `translateX(-${imageTranslate * 100}%)` }}>
                                     <img src={imageUrl} className='w-full h-full' />
                                 </div>
                             )
@@ -100,7 +100,9 @@ const BannerProduct = () => {
                     {
                         mobileImage.map((imageUrl, index) => {
                             return (
-                                <div className="w-full h-full  min-w-full min-h-full translate transition-all" key={imageUrl} style={{ transform: `translateX(-${imageTranslate * 100} %)` }}>
+                                <div className="w-full h-full  min-w-full min-h-full translate transition-all" key={imageUrl} style={{
+                                    transform: `translateX(-${imageTranslate * 100}%)`
+                                }}>
                                     <img src={imageUrl} className='w-full h-full object-cover' />
                                 </div>
                             )
