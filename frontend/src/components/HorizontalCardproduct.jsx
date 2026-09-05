@@ -4,6 +4,9 @@ import fetchCategoryWiseProduct from '../helpers/fetchCategoryWiseProduct'
 import { IoIosArrowBack } from "react-icons/io";
 import Context from "../context/index";
 import { IoIosArrowForward } from "react-icons/io";
+import { Link } from 'react-router-dom'
+import addToCart from '../helpers/addToCart'
+import displayINRCurrency from '../helpers/currency'
 
 
 const HorizontalCardProduct = ({ category, heading }) => {
@@ -26,13 +29,14 @@ const HorizontalCardProduct = ({ category, heading }) => {
     const { fetchUserAddToCart } = useContext(Context);
 
     const handleAddToCart = async (e, id) => {
+        e.preventDefault()
         await addToCart(e, id)
         fetchUserAddToCart()
     }
 
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [category])
 
     const scrollRight = () => {
         scrollElement.current.scrollLeft += 300
@@ -96,7 +100,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
 
                         data?.map((product, index) => {
                             return (
-                                <Link to={"product-Details/" + product?._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
+                                <Link to={"product-Details/" + product?._id} key={index} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white flex rounded-sm shadow-md">
                                     <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]">
                                         <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all object-fill mix-blend-multiply" />
                                     </div>

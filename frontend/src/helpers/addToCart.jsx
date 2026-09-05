@@ -1,6 +1,6 @@
 import SummaryApi from "../common/index"
 
-const addToCart = (e, id) => {
+const addToCart = async (e, id) => {
     e?.stopPropagation()
     e?.preventDefault()
 
@@ -17,7 +17,7 @@ const addToCart = (e, id) => {
         )
     })
 
-    const response = await response.json()
+    const responseData = await response.json()
 
     if (responseData.success) {
         toast.success(responseData.message)
