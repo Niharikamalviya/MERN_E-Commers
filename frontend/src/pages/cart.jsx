@@ -15,9 +15,9 @@ const Cart = () => {
         setLoading(true)
         const response = await fetch(summaryApi.addToCartView.url, {
             method: summaryApi.addToCartView.method,
-            creadentials: 'include',
+            credentials: 'include',
             headers: {
-                "content-type": "application"
+                "content-type": "application/json"
             },
 
 
@@ -25,6 +25,8 @@ const Cart = () => {
         setLoading(false)
 
         const responseData = await response.json()
+
+        console.log("cart items", responseData)
 
         if (responseData.success) {
             setData(responseData.data)
@@ -35,23 +37,22 @@ const Cart = () => {
     }
 
     useEffect(() => {
+
         fetchData()
     }, [])
 
-    const increaseQty = async (id) => {
+    const increaseQty = async (id, qty) => {
         const response = await fetch(summaryApi.updateCartProduct.url, {
             method: summaryApi.updateCartProduct.method,
-            credentails: "include",
+            credentials: "include",
             headers: {
                 "content-type": "application/json"
             },
 
-            body: Json.stringify(
-                {
-                    _id: id,
-                    quantity: qty + 1
-                }
-            )
+            body: JSON.stringify({
+                _id: id,
+                quantity: qty + 1
+            })
 
         })
 
@@ -62,21 +63,19 @@ const Cart = () => {
         }
     }
 
-    const decreaseQty = async (id) => {
+    const decreaseQty = async (id, qty) => {
         if (qty >= 2) {
             const response = await fetch(summaryApi.updateCartProduct.url, {
                 method: summaryApi.updateCartProduct.method,
-                credentails: "include",
+                credentials: "include",
                 headers: {
                     "content-type": "application/json"
                 },
 
-                body: Json.stringify(
-                    {
-                        _id: id,
-                        quantity: qty - 1
-                    }
-                )
+                body: JSON.stringify({
+                    _id: id,
+                    quantity: qty - 1
+                })
 
             })
 
@@ -90,19 +89,14 @@ const Cart = () => {
 
     const deleteCartProduct = async (id) => {
 
-        const response = await fetch(summaryApi.deleteCartProduct.url, {
-            method: summaryApi.deleteCartProduct.method,
-            credentails: "include",
+        const response = await fetch(summaryApi.deleteCartproduct.url, {
+            method: summaryApi.deleteCartproduct.method,
+            credentials: "include",
             headers: {
                 "content-type": "application/json"
             },
 
-            body: Json.stringify(
-                {
-                    _id: id,
-
-                }
-            )
+            body: JSON.stringify({ _id: id })
 
         })
 
@@ -121,7 +115,7 @@ const Cart = () => {
     return (
         <div className="container mx-auto">
 
-            <div className="text-center taxt-lg my-3">
+            <div className="text-center text-lg my-3">
                 {
                     data?.length === 0 && !loading && (
                         <p className="bg-white py-5">Empty Cart</p>
@@ -149,9 +143,9 @@ const Cart = () => {
 
                             data?.map((product, index) => {
                                 return (
-                                    <div key={index} className="w-full bg-white h-32 my-2 border-slate-300 animate-pulse rounded grid grid-cols-[128px, 1fr]">
+                                    <div key={index} className=" flex w-full bg-white h-32 my-2 border border-slate-300  rounded grid grid-cols-[128px, 1fr]">
                                         <div className="w-32 h-full bg-slate-200">
-                                            <img src={product?.productId?.productImage[0]} className="w-full h-full object-scale-down mix-blend-multipy" />
+                                            <img src={product?.productId?.productImage[0]} className="w-full h-full object-scale-down mix-blend-multiply" />
                                         </div>
                                         <div className="px-4 py-2 relative">
 
@@ -171,10 +165,10 @@ const Cart = () => {
 
                                             <div className="flex items-center gap-3">
                                                 <button className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center rounded hover:bg-red-600 hover:text-white"
-                                                    onClick={() => decreaseQty(product?.id, product?.quantity)}>-</button>
-                                                <spna>{product?.quantity}</spna>
+                                                    onClick={() => decreaseQty(product?._id, product?.quantity)}>-</button>
+                                                <span>{product?.quantity}</span>
                                                 <button className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center rounded hover:bg-red-600 hover:text-white"
-                                                    onClick={() => increaseQty(product?.id, product?.quantity)}>+</button>
+                                                    onClick={() => increaseQty(product?._id, product?.quantity)}>+</button>
                                             </div>
                                         </div>
 

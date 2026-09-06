@@ -23,7 +23,7 @@ exports.authToken = async (req, res, next) => {
                 console.log("error auth", err)
             }
 
-            req.userId = decode.id;
+            req.userId = decode?.id;
             next()
 
         })

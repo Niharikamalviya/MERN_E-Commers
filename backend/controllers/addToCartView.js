@@ -4,7 +4,6 @@ const Cart = require("../models/cartProduct")
 exports.addToCartView = async (req, res) => {
     try {
         const currentUser = req.userId
-        console.log("currentUser (from token):", currentUser)
 
         const allProduct = await Cart.find({
             userId: currentUser

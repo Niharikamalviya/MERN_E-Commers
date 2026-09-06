@@ -49,7 +49,7 @@ router.post("/filter-product", filterProduct)
 
 router.post("/addtocart", authToken, addToCart)
 router.get("/countAddToCart", authToken, countAddToCart)
-router.get("/View-cart-product", addToCartView)
+router.get("/View-cart-product", authToken, addToCartView)
 router.post("/update-Cart-product", authToken, updateAddToCart)
 router.post("/delete-Cart-Product", authToken, deleteCartProduct)
 
