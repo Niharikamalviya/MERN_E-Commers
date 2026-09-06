@@ -10,7 +10,8 @@ exports.addToCart = async (req, res) => {
         if (isProductAvailable) {
             return res.json({
                 message: "Already exist",
-                success: false
+                success: false,
+
             })
         }
 
@@ -20,19 +21,21 @@ exports.addToCart = async (req, res) => {
             userId: currentUser,
         }
 
-        const newAddToCart = new Cart.find(payload)
+        const newAddToCart = new Cart(payload)
         const saveProduct = await newAddToCart.save()
 
         return res.status(200).json({
             success: true,
-            message: " Prooduct add successfully in cart"
+            message: " Product add successfully in cart",
+            data: saveProduct
         })
     }
 
     catch (error) {
         return res.status(500).json({
             success: false,
-            message: "something went wrong adding in cart"
+            message: "something went wrong adding in cart",
+            error: error.message
         })
 
 

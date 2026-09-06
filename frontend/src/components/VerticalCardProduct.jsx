@@ -6,6 +6,7 @@ import Context from "../context/index";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from 'react-router-dom'
 import displayINRCurrency from '../helpers/currency'
+import addToCart from '../helpers/addToCart'
 
 
 const VerticalCardProduct = ({ category, heading }) => {
@@ -28,6 +29,7 @@ const VerticalCardProduct = ({ category, heading }) => {
     const { fetchUserAddToCart } = useContext(Context)
 
     const handleAddToCart = async (e, id) => {
+        e.preventDefault()
         await addToCart(e, id)
         fetchUserAddToCart()
     }
@@ -118,7 +120,7 @@ const VerticalCardProduct = ({ category, heading }) => {
 
                                     <div>
                                         <button className="text-sm bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-full "
-                                            onClick={(e) => handleAddToCart(e.product?._id)}>Add to cart</button>
+                                            onClick={(e) => handleAddToCart(e, product?._id)}>Add to cart</button>
                                     </div>
 
 

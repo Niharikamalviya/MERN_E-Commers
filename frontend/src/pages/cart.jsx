@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { RiDeleteBin7Fill } from "react-icons/ri";
-
+import Context from "../context/index";
+import displayINRCurrency from '../helpers/currency'
+import summaryApi from "../common/index"
 
 const Cart = () => {
 
@@ -113,15 +115,15 @@ const Cart = () => {
 
     }
 
-    const totalQty = data.reduce((previousValue, currentValue) => previousValue + currentValue.quantity, 0)
-    const totalPrice = data.reduce((preve, currentValue) => preve + (currentValue.quantity * currentValue?.productId?.sellingPrice), 0)
+    const totalQty = data?.reduce((previousValue, currentValue) => previousValue + currentValue.quantity, 0)
+    const totalPrice = data?.reduce((preve, currentValue) => preve + (currentValue.quantity * currentValue?.productId?.sellingPrice), 0)
 
     return (
         <div className="container mx-auto">
 
             <div className="text-center taxt-lg my-3">
                 {
-                    data.length === 0 && !loading && (
+                    data?.length === 0 && !loading && (
                         <p className="bg-white py-5">Empty Cart</p>
                     )
                 }
@@ -136,16 +138,16 @@ const Cart = () => {
                 <div className="w-full max-w-3xl">
                     {
                         loading ? (
-                            loadingCart.map(el => {
+                            loadingCart.map((ele, index) => {
                                 return (
-                                    <div kay={el + "Add To Cart Loading"} className="w-full bg-slate-200 h-32 my-2 border-slate-300 animate-pulse rounded">
+                                    <div key={index} className="w-full bg-slate-200 h-32 my-2 border-slate-300 animate-pulse rounded">
                                     </div>
                                 )
                             })
 
                         ) : (
 
-                            data.map((product, index) => {
+                            data?.map((product, index) => {
                                 return (
                                     <div key={index} className="w-full bg-white h-32 my-2 border-slate-300 animate-pulse rounded grid grid-cols-[128px, 1fr]">
                                         <div className="w-32 h-full bg-slate-200">

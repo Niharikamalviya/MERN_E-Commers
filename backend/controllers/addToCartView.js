@@ -4,6 +4,7 @@ const Cart = require("../models/cartProduct")
 exports.addToCartView = async (req, res) => {
     try {
         const currentUser = req.userId
+        console.log("currentUser (from token):", currentUser)
 
         const allProduct = await Cart.find({
             userId: currentUser
@@ -11,7 +12,8 @@ exports.addToCartView = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "cart display successfully "
+            message: "cart display successfully ",
+            data: allProduct
         })
 
 
@@ -20,7 +22,8 @@ exports.addToCartView = async (req, res) => {
     catch (error) {
         return res.status(500).json({
             success: false,
-            message: "something went wrong in showing cart product"
+            message: "something went wrong in showing cart product",
+            error: error.message
         })
 
 

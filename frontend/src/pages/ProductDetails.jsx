@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import SummaryApi from '../common/index'
 import { FaStar } from "react-icons/fa6";
 import { FaStarHalfAlt } from "react-icons/fa";
 import displayINRCurrency from "../helpers/currency"
+import VerticalCardProduct from '../components/VerticalCardProduct'
 
 
 const ProductDetails = () => {
@@ -27,13 +28,13 @@ const ProductDetails = () => {
     console.log("product id", params)
 
     const fetchProductDetails = async () => {
-        setLoanding(true)
-        const resonse = await fetch(SummaryApi.productDetails.url, {
+        setLoading(true)
+        const response = await fetch(SummaryApi.productDetails.url, {
             method: SummaryApi.productDetails.method,
             headers: {
                 "content-type": "application/json"
             },
-            body: JSON.stringfy({
+            body: JSON.stringify({
                 productID: params?.id
             })
         })
@@ -41,11 +42,11 @@ const ProductDetails = () => {
         setLoading(false)
         const dataResponse = await response.json()
 
-        setData(dataResponse?.data)
-        setActiveImage(dataResponse?.data?.productImaage[0])
+        setData(dataResponse?.data || {})
+        setActiveImage(dataResponse?.data?.productImage?.[0] || "")
     }
 
-    seeffect(() => {
+    useEffect(() => {
         fetchProductDetails()
     }, [])
 
@@ -72,9 +73,10 @@ const ProductDetails = () => {
 
                                 <div className="flex gap-2 h-full lg:flex-col overflow-scroll scrollbar-none">
                                     {
-                                        productImageListLoading.map(el => {
+                                        productImageListLoading.map((ele, index) => {
                                             return (
-                                                <div className="h-20 w-20bg-slate-200 rounded">
+                                                <div className="h-20 w-20 bg-slate-200 rounded"
+                                                    key={index}>
 
                                                 </div>
 
@@ -87,12 +89,12 @@ const ProductDetails = () => {
                             ) : (
                                 <div className="flex gap-2 h-full lg:flex-col overflow-scroll scrollbar-none">
                                     {
-                                        data?.ProductImage?.map((imagurl, index) => {
+                                        data?.productImage?.map((imageurl, index) => {
                                             return (
                                                 <div className="h-20 w-20bg-slate-200 rounded animate-pulse" key={imageurl}>
                                                     <img src={imageurl} className="w-full h-full object-scale-down mix-blend-multipy cursor-pointer"
-                                                        onMouseEnter={() => handleMouseEnterProduct(imaageurl)}
-                                                        onClick={() => handleMouseEnterProduct(imaageurl)} />
+                                                        onMouseEnter={() => handleMouseEnterProduct(imageurl)}
+                                                        onClick={() => handleMouseEnterProduct(imageurl)} />
 
                                                 </div>
 
@@ -177,7 +179,7 @@ const ProductDetails = () => {
 
                                 <div>
                                     <p className="text-slate-600 font-medium my-1"> Description :</p>
-                                    <p> {data?.ddescription}</p>
+                                    <p> {data?.description}</p>
                                 </div>
                             </div>
 
@@ -187,7 +189,7 @@ const ProductDetails = () => {
             </div>
 
             {
-                data.category && (
+                data?.category && (
                     <VerticalCardProduct category={data?.category} heading={"Recommended Product"} />
                 )
             }

@@ -3,8 +3,8 @@ const Product = require("../models/productModel")
 exports.getProductDetails = async (req, res) => {
 
     try {
-        const { productId } = req.body
-        const product = await Product.findById(productId)
+        const { productID } = req.body
+        const product = await Product.findById(productID)
 
         return res.status(200).json({
             success: true,

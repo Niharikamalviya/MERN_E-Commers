@@ -1,11 +1,12 @@
-import SummaryApi from "../common/index"
+import summaryApi from "../common/index"
+import { toast } from "react-hot-toast"
 
 const addToCart = async (e, id) => {
     e?.stopPropagation()
     e?.preventDefault()
 
-    const response = await fetch(SummaryApi.addToCartProduct.url, {
-        method: summaryApi.addToCartProduct.method,
+    const response = await fetch(summaryApi.addToCart.url, {
+        method: summaryApi.addToCart.method,
         credentials: 'include',
         headers: {
             "content-type": "application/json"
