@@ -18,7 +18,7 @@ import Alluser from "./pages/AllUser";
 import AllProduct from "./pages/AllProduct"
 import ProductDetails from "./pages/ProductDetails"
 import Cart from "./pages/cart"
-import searchBar from "./pages/searchBar"
+import SearchBar from './pages/SearchBar'
 import { setUserDetails } from "./slices/userSlice";
 
 
@@ -83,7 +83,7 @@ function App() {
             </Route>
             <Route path="/product-Details/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/search" element={<searchBar />} />
+            <Route path="/search" element={<SearchBar />} />
           </Routes>
 
         </div>

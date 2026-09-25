@@ -1,9 +1,10 @@
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import summaryApi from '../common/index'
+import VerticalCardProduct from '../components/VerticalCardProduct'
 
-const searchBar = () => {
+const SearchBar = () => {
 
     const query = useLocation()
     const [data, setData] = useState([])
@@ -24,7 +25,7 @@ const searchBar = () => {
     }
 
     useEffect(() => {
-        fetchProduct()
+        fetchproduct()
     }, [query])
 
 
@@ -49,7 +50,7 @@ const searchBar = () => {
                     data.length !== 0 && !loading && (
                         data.map((product, index) => {
                             return (
-                                <VertiicalCard loadig={loading} data={product} />
+                                <VerticalCardProduct loadig={loading} data={product} />
                             )
 
                         })
@@ -63,4 +64,4 @@ const searchBar = () => {
     )
 
 }
-export default searchBar
+export default SearchBar

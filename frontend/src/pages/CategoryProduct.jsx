@@ -9,6 +9,8 @@ const categoryProduct = () => {
     const [loading, setLoading] = useState(false)
     const [selectCategory, setSelectCategory] = useState({})
     const [filterCategoryList, setFilterCategoryList] = useState()
+    const urlSearch = new URLSearchParams(location.search)
+    const urlCategoryListinArray = urlSearch.getAll("category")
 
     const fetchData = async () => {
         const response = await fetch(summaryApi.filterProduct.url, {

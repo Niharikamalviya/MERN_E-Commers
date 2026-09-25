@@ -143,10 +143,13 @@ const Cart = () => {
 
                             data?.map((product, index) => {
                                 return (
-                                    <div key={index} className=" flex w-full bg-white h-32 my-2 border border-slate-300  rounded grid grid-cols-[128px, 1fr]">
-                                        <div className="w-32 h-full bg-slate-200">
+                                    <div key={index} className="w-full bg-white h-32 my-2 border border-slate-300  rounded grid grid-cols-[128px_1fr]">
+                                        {/* image of product */}
+                                        <div className="w-32 h-32 bg-slate-200">
                                             <img src={product?.productId?.productImage[0]} className="w-full h-full object-scale-down mix-blend-multiply" />
                                         </div>
+
+                                        {/* details of product */}
                                         <div className="px-4 py-2 relative">
 
                                             {/* delete cart  */}

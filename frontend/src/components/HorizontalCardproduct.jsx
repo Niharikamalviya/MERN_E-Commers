@@ -104,22 +104,25 @@ const HorizontalCardProduct = ({ category, heading }) => {
                                     <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]">
                                         <img src={product.productImage[0]} className="object-scale-down h-full hover:scale-110 transition-all object-fill mix-blend-multiply" />
                                     </div>
+
                                     <div className="p-4 grid ">
                                         <h2 className="font-medium md:text-lg text-base text-ellipsis line-clamp-1 ">
                                             {product?.productName}</h2>
                                         <p className="capitalize text-slate-500">
                                             {product?.category}</p>
+
+                                        <div className="flex gap-3 text-ellipsis line-clamp-1">
+                                            <p className="font-medium text-red-500">{displayINRCurrency(product?.sellingPrice)}</p>
+                                            <p className="text-slate-500 line-through">{displayINRCurrency(product?.price)}</p>
+                                        </div>
+
+                                        <div>
+                                            <button className="text-sm bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-full "
+                                                onClick={(e) => handleAddToCart(e, product?._id)}>Add to cart</button>
+                                        </div>
                                     </div>
 
-                                    <div className="flex gap-3">
-                                        <p className="font-medium text-red-500">{displayINRCurrency(product?.sellingPrice)}</p>
-                                        <p className="text-slate-500 line-through">{displayINRCurrency(product?.price)}</p>
-                                    </div>
 
-                                    <div>
-                                        <button className="text-sm bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-full "
-                                            onClick={(e) => handleAddToCart(e.product?._id)}>Add to cart</button>
-                                    </div>
 
 
 
