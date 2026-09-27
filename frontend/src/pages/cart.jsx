@@ -3,6 +3,8 @@ import { RiDeleteBin7Fill } from "react-icons/ri";
 import Context from "../context/index";
 import displayINRCurrency from '../helpers/currency'
 import summaryApi from "../common/index"
+import { loadStripe } from '@stripe/stripe-js';
+
 
 const Cart = () => {
 
@@ -24,12 +26,14 @@ const Cart = () => {
         })
         setLoading(false)
 
-        const responseData = await response.json()
+        const cartItems = await response.json()
 
-        console.log("cart items", responseData)
 
-        if (responseData.success) {
-            setData(responseData.data)
+
+        console.log("cart items", cartItems)
+
+        if (cartItems.success) {
+            setData(cartItems.data)
         }
 
 
@@ -109,6 +113,29 @@ const Cart = () => {
 
     }
 
+    const handlePayment = async () => {
+        const stripePromise = await loadStripe(process.env.REACT_STRIPE_PUBLIC_KEY);
+
+        const response = await fetch(summaryApi.payment.url, {
+            method: summaryApi.payment.method,
+            credentials: 'include',
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                cartItems: data
+            })
+        })
+
+        const responseData = await response.json()
+
+        if (responseData?.id) {
+            stripePromise.redirectToCheckout({ sessionid: responseData.id })
+        }
+
+        console.log("payment response", responseData)
+    }
+
     const totalQty = data?.reduce((previousValue, currentValue) => previousValue + currentValue.quantity, 0)
     const totalPrice = data?.reduce((preve, currentValue) => preve + (currentValue.quantity * currentValue?.productId?.sellingPrice), 0)
 
@@ -186,32 +213,39 @@ const Cart = () => {
 
                 {/* total product */}
 
-                <div className="mt-5 lg:mt-0 w-full max-w-sm">
-                    {
-                        loading ? (
-                            <div className="h-36 bg-slate-200 border border-slate-300 animate-pulse ">
+                {
+                    data[0] && (
+                        <div className="mt-5 lg:mt-0 w-full max-w-sm">
+                            {
+                                loading ? (
+                                    <div className="h-36 bg-slate-200 border border-slate-300 animate-pulse ">
 
-                            </div>
-                        ) : (
-                            <div className="h-36 bg-white">
-                                <h2 className="text-white bg-red-600 px-4 py-1" > Summary</h2>
-                                <div className="flex items-center justify-between p-4 gap-2 font-medium text-slate-600 text-lg">
-                                    <p>Quantity :</p>
-                                    <p>{totalQty}</p>
-                                </div>
+                                    </div>
+                                ) : (
+                                    <div className="h-36 bg-white">
+                                        <h2 className="text-white bg-red-600 px-4 py-1" > Summary</h2>
+                                        <div className="flex items-center justify-between p-4 gap-2 font-medium text-slate-600 text-lg">
+                                            <p>Quantity :</p>
+                                            <p>{totalQty}</p>
+                                        </div>
 
-                                <div className="flex items-center justify-between p-4 gap-2 font-medium text-slate-600 text-lg">
-                                    <p>Total Price : </p>
-                                    <p>{displayINRCurrency(totalPrice)}</p>
-                                </div>
+                                        <div className="flex items-center justify-between p-4 gap-2 font-medium text-slate-600 text-lg">
+                                            <p>Total Price : </p>
+                                            <p>{displayINRCurrency(totalPrice)}</p>
+                                        </div>
 
-                                <button className="bg-blue-600 p-2 text-white w-full mt-2 ">
-                                    Pay Now
-                                </button>
-                            </div>
-                        )
-                    }
-                </div>
+                                        <button className="bg-blue-600 p-2 text-white w-full mt-2 "
+                                            onClick={handlePayment}>
+                                            Pay Now
+                                        </button>
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )
+                }
+
+
 
 
             </div>

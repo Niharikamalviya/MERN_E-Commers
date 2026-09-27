@@ -21,6 +21,7 @@ const { deleteCartProduct } = require("../controllers/deleteCartProduct")
 const { searchBar } = require("../controllers/searchBar")
 const { filterProduct } = require("../controllers/filterProduct")
 const { updateAddToCart } = require("../controllers/updateAddToCart")
+const { payment } = require('../controllers/order/payment')
 
 
 //auth
@@ -52,6 +53,9 @@ router.get("/countAddToCart", authToken, countAddToCart)
 router.get("/View-cart-product", authToken, addToCartView)
 router.post("/update-Cart-product", authToken, updateAddToCart)
 router.post("/delete-Cart-Product", authToken, deleteCartProduct)
+
+// payment and order
+router.post('/checkout', payment)
 
 
 module.exports = router;

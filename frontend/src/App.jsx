@@ -20,6 +20,8 @@ import ProductDetails from "./pages/ProductDetails"
 import Cart from "./pages/cart"
 import SearchBar from './pages/SearchBar'
 import { setUserDetails } from "./slices/userSlice";
+import Success from './pages/Success';
+import Cancel from './pages/Cancel';
 
 
 function App() {
@@ -84,6 +86,8 @@ function App() {
             <Route path="/product-Details/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/search" element={<SearchBar />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/cancel" element={<Cancel />} />
           </Routes>
 
         </div>

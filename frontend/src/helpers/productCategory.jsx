@@ -10,7 +10,7 @@ const productCategory = [
     { id: 7, label: "Processor", value: "processor" },
     { id: 8, label: "Refrigerator", value: "refrigerator" },
     { id: 9, label: "Trimmers", value: "trimmers" },
-    { id: 10, label: "Televisions", value: "televisions" },
+    { id: 10, label: "Television", value: "television" },
     { id: 11, label: "Speakers", value: "speakers" },
     { id: 12, label: "Watches", value: "watches" },
 ]
