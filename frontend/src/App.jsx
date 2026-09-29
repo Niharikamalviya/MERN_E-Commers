@@ -22,6 +22,7 @@ import SearchBar from './pages/SearchBar'
 import { setUserDetails } from "./slices/userSlice";
 import Success from './pages/Success';
 import Cancel from './pages/Cancel';
+import Order from './pages/Order';
 
 
 function App() {
@@ -88,6 +89,7 @@ function App() {
             <Route path="/search" element={<SearchBar />} />
             <Route path="/success" element={<Success />} />
             <Route path="/cancel" element={<Cancel />} />
+            <Route path="/order" element={<Order />} />
           </Routes>
 
         </div>

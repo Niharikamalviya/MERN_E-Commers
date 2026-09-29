@@ -22,6 +22,7 @@ const { searchBar } = require("../controllers/searchBar")
 const { filterProduct } = require("../controllers/filterProduct")
 const { updateAddToCart } = require("../controllers/updateAddToCart")
 const { payment } = require('../controllers/order/payment')
+const { webhooks } = require('../controllers/order/webhook')
 
 
 //auth
@@ -55,7 +56,8 @@ router.post("/update-Cart-product", authToken, updateAddToCart)
 router.post("/delete-Cart-Product", authToken, deleteCartProduct)
 
 // payment and order
-router.post('/checkout', payment)
+router.post('/checkout', authToken, payment)
+router.post('/webhook', webhooks)
 
 
 module.exports = router;

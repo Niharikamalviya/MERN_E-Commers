@@ -34,7 +34,7 @@ exports.payment = async (req, res) => {
                             }
 
                         },
-                        unit_amount: item.productId.sellingPrice
+                        unit_amount: item.productId.sellingPrice * 100
 
                     },
                     adjustable_quantity: {
